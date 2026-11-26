@@ -84,3 +84,29 @@ Six sensors (`sensor_01`, `sensor_05`, `sensor_10`, `sensor_16`, `sensor_18`, `s
 The script produced the first five required reports. This execution log completes the sixth. Detailed analysis labels physical sensor meaning as UNKNOWN where unsupported. `BASELINE_STATUS: NOT_ESTABLISHED`; descriptive trends and statistical flags are not fault diagnosis. M2 acceptance remains pending independent Research Brain review.
 
 The compile step generated `__pycache__/M2_FD001_analysis.cpython-313.pyc`; it is outside the commit allowlist and will not be staged. Raw source files are excluded from Git. Git commit, push, and remote readback evidence will be added after change review.
+
+## Initial commit and independent remote readback
+
+The first deliverable commit was pushed to the existing `main` branch:
+
+- Commit: `9a163a85570d717888b4f38bb148330d123b25fc`
+- URL: https://github.com/chichaofuc/ntust-nasa-ai-lab/commit/9a163a85570d717888b4f38bb148330d123b25fc
+- Parent: `1964c1deec490f38f8c16b1897cd2013808eeba6`
+- Push result: `1964c1d..9a163a8 main -> main`.
+- Remote `refs/heads/main` resolved to `9a163a85570d717888b4f38bb148330d123b25fc`.
+- GitHub commit metadata lists exactly the six reports and `M2_FD001_analysis.py`; no source data or unrelated files were committed.
+
+After push, each report was independently fetched from GitHub `main`. Its remote Git Blob SHA matched the local commit's Git Blob SHA:
+
+| File | Remote Git Blob SHA | GitHub |
+|---|---|---|
+| `M2_FD001_FILE_INVENTORY.md` | `6b0202edef49e99725b259c1284cea6dfd4d7674` | https://github.com/chichaofuc/ntust-nasa-ai-lab/blob/main/M2_FD001_FILE_INVENTORY.md |
+| `M2_FD001_RAW_DATA_PROFILE.md` | `3b58fab41dff764716d9650134538d385684d896` | https://github.com/chichaofuc/ntust-nasa-ai-lab/blob/main/M2_FD001_RAW_DATA_PROFILE.md |
+| `M2_FD001_DATA_QUALITY.md` | `4c91e3897d4969a0163fcfadcdb55e0fd965e9bf` | https://github.com/chichaofuc/ntust-nasa-ai-lab/blob/main/M2_FD001_DATA_QUALITY.md |
+| `M2_FD001_TREND_ANALYSIS.md` | `bd7377b7d5bc8d662aae96c532aff7be725500dc` | https://github.com/chichaofuc/ntust-nasa-ai-lab/blob/main/M2_FD001_TREND_ANALYSIS.md |
+| `M2_FD001_DATA_CONTRACT.md` | `05a617f80efc562430718ec90ea8f9a16b01daac` | https://github.com/chichaofuc/ntust-nasa-ai-lab/blob/main/M2_FD001_DATA_CONTRACT.md |
+| `M2_FD001_EXECUTION_LOG.md` | `969a9336931f585338f4f2c3c403321620c017ec` | https://github.com/chichaofuc/ntust-nasa-ai-lab/blob/main/M2_FD001_EXECUTION_LOG.md |
+
+The readback verified each fetched path and content was served at the expected report path. Raw data remain excluded. A Python bytecode cache created by `py_compile` is untracked and excluded from all commits; pre-existing untracked user files and the `data/` directory were not staged or modified.
+
+This log update records the post-push verification and will be committed separately, then all six files will be fetched and verified again against the final `main` commit.
