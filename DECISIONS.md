@@ -114,3 +114,20 @@
 **Authority:** STUDENT-MAIN Brain
 **Work Items:** M1_GOVERNANCE_ACCEPTANCE_SYNC_001; M1_GOVERNANCE_STATUS_CLARIFICATION_001; M1_DATASET_PROFILE_001
 **Evidence:** Clarification commit 23be3089a26ea993ab4344de00aac8e759b9887f; Research Review PASS_WITH_NOTES and MAIN acceptance decision supplied in M1_GOVERNANCE_ACCEPTANCE_SYNC_001. M1_DATASET_PROFILE_001 is separately authorized but awaits its own Research Brain dispatch; no Dataset Profile completion is claimed.
+
+
+## D018 — M1 Dataset Profile acceptance and domain acceptance
+
+**Decision:** M1 Dataset Profile is ACCEPTED_WITH_NOTES and M1 Domain Acceptance is ESTABLISHED.  
+**Status:** ACCEPTED_WITH_NOTES / ESTABLISHED  
+**Authority:** STUDENT-MAIN Brain  
+**Work Item:** M2_FD001_LOCAL_DATA_VALIDATION_001  
+**Evidence:** Formal MAIN authorization and acceptance statement supplied on 2026-11-26. This decision supersedes the earlier pending/not-accepted status snapshots for current governance state; historical records remain preserved.
+
+## D019 — M2 FD001 Local Data Validation authorization
+
+**Decision:** M2_FD001_LOCAL_DATA_VALIDATION_001 is FORMALLY AUTHORIZED. Phase A local file/raw data validation is mandatory. Phase B Engine/Cycle/Sensor trend evidence and data quality is explicitly authorized only after Phase A passes. M2 MAIN Acceptance remains PENDING until independent Research Brain review and MAIN decision.  
+**Status:** FORMALLY_AUTHORIZED / PHASE_A_PENDING / PHASE_B_LOCKED_PENDING_PHASE_A  
+**Authority:** STUDENT-MAIN Brain  
+**Work Item:** M2_FD001_LOCAL_DATA_VALIDATION_001  
+**Evidence:** Complete formal MAIN work order issued on 2026-11-26. Inputs are limited to the Owner's existing local train_FD001.txt, test_FD001.txt, and RUL_FD001.txt. No data download/substitution, raw-source modification/commit, model training, website/API integration, or scope expansion is authorized.
