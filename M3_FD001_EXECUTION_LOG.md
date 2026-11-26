@@ -54,6 +54,27 @@ The API reads only the three sources, validates size/hash/format and verified ro
 
 ## Git and remote evidence
 
-At the time this log was first prepared, the authorized M3 files were ready for review and commit to the existing `main`; no raw or unrelated file was staged. The implementation commit SHA, parent SHA, changed-file list, push result, final remote HEAD, and remote readback of all eight files are recorded in the Worker Return after the authorized commits and post-push verification. The execution-log commit's own SHA is also reported there to avoid circular self-reference inside this log.
+The first implementation/evidence commit was pushed to the existing `main`:
+
+- Commit: `84ddd697aef5af67678b0e850779a6bc67983684` — https://github.com/chichaofuc/ntust-nasa-ai-lab/commit/84ddd697aef5af67678b0e850779a6bc67983684
+- Parent: `f2f26d531d80e6afe4a6f134ca70a7906b2c2065`.
+- Message: `feat(M3): add FD001 read-only API`.
+- Push: `f2f26d5..84ddd69 main -> main`.
+- The commit changed exactly the eight files listed above. No source data, caches, or unrelated files were committed.
+
+The post-push GitHub `main` readback at commit `84ddd697aef5af67678b0e850779a6bc67983684` returned all eight files. Their GitHub Blob SHA values matched the local commit:
+
+| File | Blob SHA at implementation commit | GitHub |
+|---|---|---|
+| `M3_FD001_api.py` | `3617296b99f2650fe7512f3d6cde9775f0b8b949` | https://github.com/chichaofuc/ntust-nasa-ai-lab/blob/main/M3_FD001_api.py |
+| `test_M3_FD001_api.py` | `228329ae950644d1ce5c7d63aff1652b8126ace0` | https://github.com/chichaofuc/ntust-nasa-ai-lab/blob/main/test_M3_FD001_api.py |
+| `M3_FD001_reconcile.py` | `551ed7de7853d5846a634de7af03aeddf2b7e8e1` | https://github.com/chichaofuc/ntust-nasa-ai-lab/blob/main/M3_FD001_reconcile.py |
+| `M3_FD001_API_CONTRACT.md` | `0dc4c3aab62d7fb5cd6270cc673335fc2ba8263f` | https://github.com/chichaofuc/ntust-nasa-ai-lab/blob/main/M3_FD001_API_CONTRACT.md |
+| `M3_FD001_SOURCE_ROW_RECONCILIATION.md` | `c34827465c0143eda1db8193ecb43580d1f5fb55` | https://github.com/chichaofuc/ntust-nasa-ai-lab/blob/main/M3_FD001_SOURCE_ROW_RECONCILIATION.md |
+| `M3_FD001_TEST_EXECUTION_LOG.md` | `d122ae83cc00b59b7c82911e1f9af399c3213be9` | https://github.com/chichaofuc/ntust-nasa-ai-lab/blob/main/M3_FD001_TEST_EXECUTION_LOG.md |
+| `M3_FD001_EXECUTION_LOG.md` | `54aa50a6feb613d82017b41aa62d828d406a9146` | https://github.com/chichaofuc/ntust-nasa-ai-lab/blob/main/M3_FD001_EXECUTION_LOG.md |
+| `README.md` | `f7ef9af4d3b60e5e23d2febd11a231a01111ce3e` | https://github.com/chichaofuc/ntust-nasa-ai-lab/blob/main/README.md |
+
+This post-push verification evidence is recorded in a follow-up update to this log. The final `main` HEAD and final readback SHA for this log are reported separately in the Worker Return to avoid self-reference.
 
 M3 scope only: the FD001 read-only API, API tests, source-row reconciliation, documentation, and execution evidence. No frontend, ML, diagnosis, M4, M5, or dataset modification was performed. Final M3 acceptance remains with STUDENT-WEB review and the MAIN authority; this Worker does not declare acceptance.
