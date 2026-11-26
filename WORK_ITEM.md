@@ -205,3 +205,121 @@ The complete authoritative requirements, Phase A/B acceptance gates, evidence ru
 Research Brain is explicitly authorized to synchronize the four governance files (AGENTS.md, ROADMAP.md, WORK_ITEM.md, DECISIONS.md) with this MAIN decision, preserving historical records, and to remotely read back all four files. Only after successful remote readback may Research Brain create the formal Worker dispatch command. The Worker is NOT_YET_DISPATCHED until the Owner pastes that command to the Worker.
 
 **Current execution status:** Research Own Worker NOT_YET_DISPATCHED; Phase A PENDING; Phase B LOCKED_PENDING_PHASE_A; M2 MAIN Acceptance PENDING.
+
+
+---
+
+## Active Work Item — M3_FD001_READONLY_API_001
+
+**PROJECT:** NTUST NASA AI Lab  
+**WORK_ITEM_ID:** M3_FD001_READONLY_API_001  
+**CURRENT_MILESTONE:** M3_WEB_MVP  
+**RELATED_WORK_ITEM:** M2_FD001_LOCAL_DATA_VALIDATION_001  
+**M2_STATUS:** ACCEPTED_WITH_NOTES  
+**MAIN_DECISION:** FORMAL_AUTHORIZATION_CONFIRMED  
+**TARGET:** STUDENT-WEB Brain → Web Own Worker (Codex)  
+**WORK_ITEM_TYPE:** BOUNDED_READONLY_API_IMPLEMENTATION  
+**AUTHORITY:** STUDENT-MAIN Brain  
+**RETURN_TO:** STUDENT-WEB Brain  
+**COMMAND_STATUS:** CREATED_NOT_DISPATCHED
+
+### Objective
+
+在學生 workspace 中，使用 M2 已驗證的 NASA C-MAPSS FD001 原始資料建立唯讀 API，供後續健康分析網站讀取 Engine Unit、Cycle、Sensor 與歷史感測器數值。此工單只涵蓋 API、來源列追溯與 API 測試，不包含前端、模型訓練或 M4 Evidence Prompt 功能。
+
+### Authorized inputs and data boundary
+
+只允許使用 M2 工單驗證的原始檔：
+- `train_FD001.txt`
+- `test_FD001.txt`
+- `RUL_FD001.txt`
+
+Worker 必須先在學生 workspace 確認實際檔案路徑、檔案存在性及 SHA-256，並與 M2 已接受的檔案清單／Data Contract 對照。若路徑、雜湊或格式不一致，立即 STOP，不得自行尋找替代資料。
+
+**明確禁止：**
+- 不得讀取、合併、轉換或引用 GEN-001。
+- 不得讀取、合併、轉換或引用 Ch12 合成 CSV，包括任何 synthetic sensor CSV。
+- 不得以合成資料補值、測試 API、展示範例或產生測試快照。
+- 不得下載其他 NASA 資料集或重新取得 FD001 檔案。
+- 不得修改、移動、重命名或提交三份原始資料檔；不得提交原始資料副本。
+- 不得改變 M2 Data Contract 已定義的 Unit、Cycle、Operating Settings、Sensor 欄位語義與欄位順序。
+
+### Required API
+
+至少實作以下唯讀 GET endpoints：
+
+1. `GET /api/health`
+   - 回報 API 狀態、資料檔可讀狀態、實際使用的資料來源識別及必要的資料驗證摘要。
+   - 不得只因 Flask 啟動就回報資料健康；資料檔缺失或驗證失敗時必須明確回報 degraded/error。
+
+2. `GET /api/catalog`
+   - 回傳資料集識別、split、欄位索引／欄位名稱、Unit/Cycle/Operating Settings/Sensor 定義、欄位數及 provenance 規則。
+   - 欄位 mapping 必須逐項符合 M2 Data Contract，不得自行重新命名或猜測。
+
+3. `GET /api/units?split=train`
+   - 支援 `train`、`test`，回傳該 split 真實存在的 Unit ID 清單及必要的 cycle 範圍摘要。
+   - 不得從另一 split 或合成資料補出 Unit。
+
+4. `GET /api/history?split=train&unit=1&sensor=7&start=1&end=20`
+   - 支援 `train`、`test`；依 Unit、Sensor、Cycle 範圍回傳實際歷史列。
+   - 回傳每筆記錄的 Unit ID、Cycle、Sensor ID／欄位、數值，以及 provenance。
+   - Sensor ID 的索引基準必須在 catalog 清楚聲明，並依 M2 Data Contract 一致實作；不可默默將 0-based 與 1-based 混用。
+   - Test split 的 RUL 若被提供，必須依 M2 已確認的 test Unit 順序與 RUL positional mapping 對應，並標明其來源為 `RUL_FD001.txt`；不得將 RUL 當作 test 原始列中的欄位。
+
+### Source-row traceability — mandatory
+
+API 每筆 history record 必須可追溯至原始檔實際列，不可只回傳轉換後 DataFrame 的列索引。
+
+- Train record：回傳 `source_file=train_FD001.txt`、1-based physical `source_line`，以及 split、Unit ID、Cycle、Sensor 欄位識別。
+- Test record：回傳 `source_file=test_FD001.txt`、1-based physical `source_line`，以及 split、Unit ID、Cycle、Sensor 欄位識別。
+- RUL mapping：若回傳 RUL，提供 `source_file=RUL_FD001.txt`、1-based physical `source_line`、test Unit ID、test Unit 順序索引及 mapping 說明。
+- 每筆 API 數值都必須能用「來源檔 + 原始列號 + 欄位索引」回到原始資料列並核對。若讀檔流程會過濾空白列或重新排序，必須保留原始 physical line mapping。
+- 不可用推估列號、DataFrame index 或排序後索引冒充原始來源列號。
+
+### Response contract
+
+所有成功與錯誤回應均使用一致 JSON 格式，並在 API 文件中列出實際 schema 與範例。
+
+- Success：至少包含 `ok: true`、`data`、`provenance` 或逐筆 provenance。
+- Error：至少包含 `ok: false`、穩定的 `error.code`、可讀的 `error.message`；不得回傳 traceback、絕對路徑中的敏感資訊或原始資料全文。
+- 缺值：JSON 一律使用 `null`，不得以 0、空字串、前值填補或其他 sentinel 假裝有觀測值。
+- 不存在的 Unit／Cycle／Sensor 或查詢範圍：使用一致且文件化的 4xx 回應；參數格式錯誤、split 不支援、start>end 等均須明確拒絕。
+- 資料檔不存在、讀取失敗、hash mismatch 或 schema mismatch：health 不得回報 healthy，history 不得靜默回傳空資料或 fallback 至其他資料集。
+- API 僅提供 GET；不得新增資料寫入、刪除、更新或原始檔修改 endpoint。
+
+### Required deliverables
+
+1. Read-only API implementation and application entry point.
+2. API contract document covering all endpoints, query parameters, success/error schema, null semantics, sensor index basis, and provenance.
+3. Tests for all endpoints, validation errors, missing values, source-row mapping, and failure behavior.
+4. Source-row cross-check report containing representative records from train and test (and RUL mapping if exposed), with API output compared directly against the exact original file line and column.
+5. Execution log recording workspace, source paths, SHA-256 readback, commands, test results, commit SHA and changed-file list.
+
+### Acceptance criteria
+
+- [ ] All three source files are verified against the accepted M2 inventory/Data Contract before use.
+- [ ] No GEN-001 or Ch12 synthetic CSV is accessed or mixed into API code, fixtures, tests, or outputs.
+- [ ] All four required endpoints work with documented response contracts.
+- [ ] Unit/Cycle/Sensor mapping matches M2 Data Contract.
+- [ ] Missing observations serialize as JSON null, never fabricated numeric values.
+- [ ] Every returned history row includes verifiable original source file and 1-based physical source line.
+- [ ] Representative train/test API records are independently reconciled against exact raw source lines and columns; RUL positional mapping is reconciled if exposed.
+- [ ] Invalid parameters, unsupported split, unknown IDs, missing files, hash mismatch and schema mismatch are handled explicitly.
+- [ ] API is read-only and raw source files remain unchanged.
+- [ ] Automated tests pass; actual test command and output are recorded.
+- [ ] Only authorized code, tests, API contract and evidence files are committed; no raw datasets, synthetic datasets, credentials or unrelated files.
+- [ ] Changes are pushed to GitHub `main`; Web Brain reads back the actual pushed files before recommending PASS.
+
+### STOP_IF
+
+Any source file is missing; SHA-256 differs from M2 accepted inventory; M2 Data Contract cannot resolve a field/index ambiguity; source-row mapping cannot be preserved; GEN-001 or Ch12 synthetic CSV would be required or is encountered; API requires data substitution or source modification; workspace/path is ambiguous; unrelated files would be overwritten; scope expands to frontend, model training, or M4; GitHub access/push/readback fails; or evidence cannot be independently checked.
+
+### Dispatch and review gates
+
+- This governance record authorizes M3 scope but does not itself dispatch the Worker.
+- Web Brain must read the latest `AGENTS.md` from GitHub `main`, verify this Work Item and M2 acceptance status, then prepare the complete Worker command.
+- Worker execution begins only after the Owner pastes the formal command with `COMMAND_STATUS: COMMAND_DISPATCHED`.
+- Worker Return → Web Brain independent review → STUDENT-MAIN acceptance.
+- No PASS or M3 completion may be claimed before actual pushed-file readback and source-row reconciliation evidence.
+
+**Current status:** M3 FORMALLY AUTHORIZED; GOVERNANCE SYNC IN PROGRESS; Web Own Worker NOT_DISPATCHED.
