@@ -55,8 +55,8 @@ Never expose or commit secrets, tokens, or private keys. Never embed credentials
 - **M0 Governance:** ACCEPTED.
 - **M1 Governance Sync:** ACCEPTED_WITH_NOTES; MAIN acceptance is ACCEPTED_WITH_NOTES.
 - **M1 Governance Status Clarification:** ACCEPTED_WITH_NOTES; Research Review is PASS_WITH_NOTES and MAIN acceptance is ACCEPTED_WITH_NOTES. Evidence is recorded in M1_GOVERNANCE_ACCEPTANCE_SYNC_001 and clarification commit 23be3089a26ea993ab4344de00aac8e759b9887f.
-- **M1 Dataset Profile:** NOT_ACCEPTED; domain acceptance is NOT_ESTABLISHED. M1_DATASET_PROFILE_001 remains a separately authorized Work Item pending its own Research Brain dispatch and user-pasted Worker command.
-- **M2 FD001 Validation:** LOCKED; M2_RELEASE is NOT_AUTHORIZED.
+- **M1 Dataset Profile:** ACCEPTED_WITH_NOTES; M1 Domain Acceptance is ESTABLISHED, per formal MAIN decision in M2_FD001_LOCAL_DATA_VALIDATION_001.
+- **M2 FD001 Local Data Validation:** FORMALLY AUTHORIZED under M2_FD001_LOCAL_DATA_VALIDATION_001; Phase A is mandatory and Phase B is gated on Phase A acceptance.
 - **M3–M5:** LOCKED.
 
-Do not execute or dispatch the M1 Dataset Profile without its own active Research Brain dispatch. No M2 or later work is authorized.
+M1 Dataset Profile is accepted with notes; domain acceptance is established. M2 is authorized only within the scope and gates of M2_FD001_LOCAL_DATA_VALIDATION_001. M3–M5 remain LOCKED and are not authorized.
