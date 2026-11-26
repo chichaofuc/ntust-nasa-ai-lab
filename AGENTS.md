@@ -56,7 +56,8 @@ Never expose or commit secrets, tokens, or private keys. Never embed credentials
 - **M1 Governance Sync:** ACCEPTED_WITH_NOTES; MAIN acceptance is ACCEPTED_WITH_NOTES.
 - **M1 Governance Status Clarification:** ACCEPTED_WITH_NOTES; Research Review is PASS_WITH_NOTES and MAIN acceptance is ACCEPTED_WITH_NOTES. Evidence is recorded in M1_GOVERNANCE_ACCEPTANCE_SYNC_001 and clarification commit 23be3089a26ea993ab4344de00aac8e759b9887f.
 - **M1 Dataset Profile:** ACCEPTED_WITH_NOTES; M1 Domain Acceptance is ESTABLISHED, per formal MAIN decision in M2_FD001_LOCAL_DATA_VALIDATION_001.
-- **M2 FD001 Local Data Validation:** FORMALLY AUTHORIZED under M2_FD001_LOCAL_DATA_VALIDATION_001; Phase A is mandatory and Phase B is gated on Phase A acceptance.
-- **M3–M5:** LOCKED.
+- **M2 FD001 Local Data Validation:** ACCEPTED_WITH_NOTES by STUDENT-MAIN after Research Brain review of the final return and remote evidence.
+- **M3 Health Analysis Web MVP:** FORMALLY AUTHORIZED under M3_FD001_READONLY_API_001, limited to a read-only API using the Owner's verified local FD001 source files and the accepted M2 Data Contract.
+- **M4–M5:** LOCKED.
 
-M1 Dataset Profile is accepted with notes; domain acceptance is established. M2 is authorized only within the scope and gates of M2_FD001_LOCAL_DATA_VALIDATION_001. M3–M5 remain LOCKED and are not authorized.
+M1 Dataset Profile is accepted with notes; domain acceptance is established. M2 FD001 Local Data Validation is ACCEPTED_WITH_NOTES. M3 is authorized only within the scope and acceptance gates of M3_FD001_READONLY_API_001. M4–M5 remain LOCKED and are not authorized.
