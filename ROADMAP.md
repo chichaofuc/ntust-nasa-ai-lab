@@ -1,6 +1,6 @@
 # NTUST NASA AI Lab — Roadmap
 
-The project follows milestone-controlled, sequential development. M0 is ACCEPTED. M1 Governance Sync and M1 Governance Status Clarification are ACCEPTED_WITH_NOTES. M1 Dataset Profile is ACCEPTED_WITH_NOTES and M1 Domain Acceptance is ESTABLISHED by formal MAIN authorization. M2 FD001 Local Data Validation is ACCEPTED_WITH_NOTES by STUDENT-MAIN. M3 Health Analysis Web MVP is FORMALLY AUTHORIZED under M3_FD001_READONLY_API_001. M4–M5 remain LOCKED.
+The project follows milestone-controlled, sequential development. M0 is ACCEPTED. M1 Governance Sync and M1 Governance Status Clarification are ACCEPTED_WITH_NOTES. M1 Dataset Profile is ACCEPTED_WITH_NOTES and M1 Domain Acceptance is ESTABLISHED by formal MAIN authorization. M2 FD001 Local Data Validation is ACCEPTED_WITH_NOTES by STUDENT-MAIN. M3 Health Analysis Web MVP is ACCEPTED_WITH_NOTES under M3_FD001_READONLY_API_001. M4–M5 remain LOCKED.
 
 ## M0 — Project Governance & Environment Initialization
 
@@ -62,4 +62,4 @@ The project follows milestone-controlled, sequential development. M0 is ACCEPTED
 
 **Acceptance:** All required functionality works on actual FD001 data, with reproducible and traceable results.
 
-**Current authorization:** M0 is ACCEPTED. M1 Dataset Profile is ACCEPTED_WITH_NOTES and M1 Domain Acceptance is ESTABLISHED. M2 FD001 Local Data Validation is ACCEPTED_WITH_NOTES. M3 Health Analysis Web MVP is FORMALLY AUTHORIZED under M3_FD001_READONLY_API_001. M4–M5 remain LOCKED.
+**Current authorization:** M0 is ACCEPTED. M1 Dataset Profile is ACCEPTED_WITH_NOTES and M1 Domain Acceptance is ESTABLISHED. M2 FD001 Local Data Validation is ACCEPTED_WITH_NOTES. M3 Health Analysis Web MVP is ACCEPTED_WITH_NOTES under M3_FD001_READONLY_API_001. M4–M5 remain LOCKED.
