@@ -106,3 +106,11 @@
 **Authority:** STUDENT-MAIN Brain
 **Work Item:** M1_GOVERNANCE_STATUS_CLARIFICATION_001
 **Evidence:** The explicit MAIN status in this dispatched Work Item.
+
+## D017 — Record MAIN governance acceptance decisions
+
+**Decision:** M0 Governance remains ACCEPTED. M1 Governance Sync is ACCEPTED_WITH_NOTES. M1 Governance Status Clarification is ACCEPTED_WITH_NOTES, with Research Review PASS_WITH_NOTES and MAIN acceptance ACCEPTED_WITH_NOTES. M1 Dataset Profile remains NOT_ACCEPTED; M1 Domain Acceptance remains NOT_ESTABLISHED. M2 FD001 Validation is LOCKED, M2_RELEASE is NOT_AUTHORIZED, and M3–M5 remain LOCKED.
+**Status:** RECORDED
+**Authority:** STUDENT-MAIN Brain
+**Work Items:** M1_GOVERNANCE_ACCEPTANCE_SYNC_001; M1_GOVERNANCE_STATUS_CLARIFICATION_001; M1_DATASET_PROFILE_001
+**Evidence:** Clarification commit 23be3089a26ea993ab4344de00aac8e759b9887f; Research Review PASS_WITH_NOTES and MAIN acceptance decision supplied in M1_GOVERNANCE_ACCEPTANCE_SYNC_001. M1_DATASET_PROFILE_001 is separately authorized but awaits its own Research Brain dispatch; no Dataset Profile completion is claimed.

@@ -81,7 +81,7 @@ STUDENT-MAIN Brain
 
 This Work Item is authorized for the M1 Dataset Profile only after governance synchronization and MAIN review/dispatch. No M1 analysis has been performed under M1_GOVERNANCE_SYNC_001.
 
-## M1 Governance Sync — Execution and Acceptance Status
+## Historical Record — M1 Governance Sync Execution and Acceptance Status
 
 **Work Item:** M1_GOVERNANCE_SYNC_001
 **Result:** PASS_WITH_NOTES.
@@ -89,7 +89,7 @@ This Work Item is authorized for the M1 Dataset Profile only after governance sy
 **Verified baseline commit:** 7e95db3494567f96bb6546df8456d150c40551eb.
 **Evidence:** This commit was the expected GitHub main HEAD at clarification dispatch. Its parent is the original M0 commit 16b017d69fd0b60e538032bc2c6082af558e22f2. The current status values below are supplied by M1_GOVERNANCE_STATUS_CLARIFICATION_001; no MAIN acceptance of the Governance Sync is claimed here.
 
-## Current Governance Status
+## Historical Governance Status Snapshot — before acceptance sync
 
 M0_STATUS: ACCEPTED
 
@@ -110,7 +110,7 @@ M2_RELEASE: NOT_AUTHORIZED
 
 M3_M5_STATUS: LOCKED
 
-## Current Active Work Item
+## Historical Active Work Item Record — M1_GOVERNANCE_STATUS_CLARIFICATION_001
 
 **PROJECT:** NTUST NASA AI Lab
 **CURRENT_MILESTONE:** M1_SYNTHETIC_DATASET_PROFILE
@@ -122,3 +122,44 @@ M3_M5_STATUS: LOCKED
 **EXECUTION:** IN_PROGRESS_UNTIL_VERIFIED
 
 This Work Item updates governance status only. M1 Dataset Profile remains NOT_ACCEPTED and has not been executed or dispatched. M2–M5 remain LOCKED.
+
+## M1 Governance Acceptance Synchronization — 2026-11-26
+
+**Work Item:** M1_GOVERNANCE_ACCEPTANCE_SYNC_001
+**Prior clarification Work Item:** M1_GOVERNANCE_STATUS_CLARIFICATION_001
+**Research Review:** PASS_WITH_NOTES.
+**MAIN acceptance of Governance Sync:** ACCEPTED_WITH_NOTES.
+**MAIN acceptance of Governance Status Clarification:** ACCEPTED_WITH_NOTES.
+**Evidence commit:** 23be3089a26ea993ab4344de00aac8e759b9887f ([GitHub commit](https://github.com/chichaofuc/ntust-nasa-ai-lab/commit/23be3089a26ea993ab4344de00aac8e759b9887f)).
+**Evidence reference:** M1_GOVERNANCE_STATUS_CLARIFICATION_001 and the formal MAIN decision in M1_GOVERNANCE_ACCEPTANCE_SYNC_001.
+
+## Current Governance Status
+
+M0_GOVERNANCE: ACCEPTED
+
+M1_GOVERNANCE_SYNC:
+  STATUS: ACCEPTED_WITH_NOTES
+  MAIN_ACCEPTANCE: ACCEPTED_WITH_NOTES
+
+M1_GOVERNANCE_STATUS_CLARIFICATION:
+  STATUS: ACCEPTED_WITH_NOTES
+  RESEARCH_REVIEW: PASS_WITH_NOTES
+  MAIN_ACCEPTANCE: ACCEPTED_WITH_NOTES
+
+M1_DATASET_PROFILE:
+  STATUS: NOT_ACCEPTED
+  DOMAIN_ACCEPTANCE: NOT_ESTABLISHED
+  MAIN_ACCEPTANCE: NOT_ACCEPTED
+
+M2_FD001_VALIDATION:
+  STATUS: LOCKED
+  M2_RELEASE: NOT_AUTHORIZED
+
+M3_M5_STATUS: LOCKED
+
+## Next Separately Authorized Work Item
+
+**WORK_ITEM_ID:** M1_DATASET_PROFILE_001
+**STATUS:** AUTHORIZED, NOT_DISPATCHED
+**NEXT_STEP:** Await its own Research Brain dispatch and user-pasted Worker command.
+**EXECUTION:** NOT_STARTED. Dataset Profile is not completed or accepted.

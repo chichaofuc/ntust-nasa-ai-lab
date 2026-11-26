@@ -52,11 +52,11 @@ Never expose or commit secrets, tokens, or private keys. Never embed credentials
 
 ## Current milestone boundary
 
-- **M0:** ACCEPTED.
-- **M1 Governance Sync:** PASS_WITH_NOTES; MAIN acceptance is PENDING.
-- **M1 Governance Status Clarification:** AUTHORIZED; execution is IN_PROGRESS_UNTIL_VERIFIED under M1_GOVERNANCE_STATUS_CLARIFICATION_001.
-- **M1 Dataset Profile:** NOT_ACCEPTED; domain acceptance is NOT_ESTABLISHED. Do not execute or dispatch the profile under the governance-status clarification Work Item.
-- **M2:** LOCKED; M2_RELEASE is NOT_AUTHORIZED.
+- **M0 Governance:** ACCEPTED.
+- **M1 Governance Sync:** ACCEPTED_WITH_NOTES; MAIN acceptance is ACCEPTED_WITH_NOTES.
+- **M1 Governance Status Clarification:** ACCEPTED_WITH_NOTES; Research Review is PASS_WITH_NOTES and MAIN acceptance is ACCEPTED_WITH_NOTES. Evidence is recorded in M1_GOVERNANCE_ACCEPTANCE_SYNC_001 and clarification commit 23be3089a26ea993ab4344de00aac8e759b9887f.
+- **M1 Dataset Profile:** NOT_ACCEPTED; domain acceptance is NOT_ESTABLISHED. M1_DATASET_PROFILE_001 remains a separately authorized Work Item pending its own Research Brain dispatch and user-pasted Worker command.
+- **M2 FD001 Validation:** LOCKED; M2_RELEASE is NOT_AUTHORIZED.
 - **M3–M5:** LOCKED.
 
-M1 Dataset Profile work remains governed by M1_DATASET_PROFILE_001 and requires its own authorized dispatch and acceptance. No M2 or later work is authorized.
+Do not execute or dispatch the M1 Dataset Profile without its own active Research Brain dispatch. No M2 or later work is authorized.
