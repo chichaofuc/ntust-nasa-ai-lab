@@ -163,3 +163,45 @@ M3_M5_STATUS: LOCKED
 **STATUS:** AUTHORIZED, NOT_DISPATCHED
 **NEXT_STEP:** Await its own Research Brain dispatch and user-pasted Worker command.
 **EXECUTION:** NOT_STARTED. Dataset Profile is not completed or accepted.
+
+ 
+## Current Active Work Item — M2_FD001_LOCAL_DATA_VALIDATION_001
+
+**PROJECT:** NTUST NASA AI Lab  
+**CURRENT_MILESTONE:** M2_FD001_LOCAL_DATA_VALIDATION  
+**AUTHORITY:** STUDENT-MAIN Brain  
+**MAIN_DECISION:** FORMAL_AUTHORIZATION_CONFIRMED  
+**AUTHORIZATION STATUS:** FORMALLY AUTHORIZED  
+**TARGET:** Research Brain → Research Own Worker (Codex)  
+**RETURN_TO:** STUDENT-MAIN Brain
+
+### MAIN acceptance and prerequisite status
+
+- M0 Governance: ACCEPTED.
+- M1 Dataset Profile: ACCEPTED_WITH_NOTES.
+- M1 Domain Acceptance: ESTABLISHED.
+- M2 FD001 Local Data Validation: FORMALLY AUTHORIZED.
+- M2 MAIN Acceptance: PENDING.
+
+### Authorized input and scope
+
+Only the Owner's existing local train_FD001.txt, test_FD001.txt, and RUL_FD001.txt may be used. Actual paths must be confirmed locally. Do not download, substitute, modify, move, reformat, or commit raw source files. No FD002, FD004, synthetic data, model training, website/API integration, or scope expansion is authorized.
+
+The Work Item consists of Phase A — local file and raw data validation — followed by Phase B — Engine/Cycle/Sensor trend evidence and data quality. Phase B is authorized but strictly gated: it may begin only after Phase A passes. If Phase A does not pass, Phase B remains blocked.
+
+### Required deliverables
+
+1. M2_FD001_FILE_INVENTORY.md
+2. M2_FD001_RAW_DATA_PROFILE.md
+3. M2_FD001_DATA_QUALITY.md
+4. M2_FD001_TREND_ANALYSIS.md
+5. M2_FD001_DATA_CONTRACT.md
+6. M2_FD001_EXECUTION_LOG.md
+
+The complete authoritative requirements, Phase A/B acceptance gates, evidence rules, Data Contract requirements, Git rules, STOP_IF conditions, and return format are contained in the formal MAIN work order M2_FD001_LOCAL_DATA_VALIDATION_001 issued on 2026-11-26. Research Brain must include that full work order in the Worker command; it must not be reduced to a summary or reference only.
+
+### Governance synchronization and dispatch gate
+
+Research Brain is explicitly authorized to synchronize the four governance files (AGENTS.md, ROADMAP.md, WORK_ITEM.md, DECISIONS.md) with this MAIN decision, preserving historical records, and to remotely read back all four files. Only after successful remote readback may Research Brain create the formal Worker dispatch command. The Worker is NOT_YET_DISPATCHED until the Owner pastes that command to the Worker.
+
+**Current execution status:** Research Own Worker NOT_YET_DISPATCHED; Phase A PENDING; Phase B LOCKED_PENDING_PHASE_A; M2 MAIN Acceptance PENDING.
