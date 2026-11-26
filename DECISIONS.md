@@ -73,3 +73,36 @@
 **Authority:** STUDENT-MAIN Brain
 **Work Item:** M1_GOVERNANCE_SYNC_001
 **Evidence:** The MAIN milestone controls supplied in M1_GOVERNANCE_SYNC_001.
+
+## D013 — M1 Governance Sync status
+
+**Decision:** M1_GOVERNANCE_SYNC_001 is PASS_WITH_NOTES; MAIN acceptance remains PENDING.
+**Status:** PASS_WITH_NOTES / MAIN_ACCEPTANCE_PENDING
+**Authority:** STUDENT-MAIN Brain
+**Work Item:** M1_GOVERNANCE_STATUS_CLARIFICATION_001
+**Evidence:** Verified baseline commit 7e95db3494567f96bb6546df8456d150c40551eb and this dispatched status-clarification Work Item. PASS_WITH_NOTES does not constitute MAIN acceptance.
+
+## D014 — M1 Governance Status Clarification authorization
+
+**Decision:** M1_GOVERNANCE_STATUS_CLARIFICATION_001 is AUTHORIZED and remains IN_PROGRESS_UNTIL_VERIFIED.
+**Status:** AUTHORIZED
+**Authority:** STUDENT-MAIN Brain
+**Work Item:** M1_GOVERNANCE_STATUS_CLARIFICATION_001
+**Evidence:** The authorization and execution status supplied in this Work Item.
+
+## D015 — M1 Dataset Profile acceptance status
+
+**Decision:** M1 Dataset Profile domain acceptance is NOT_ESTABLISHED and MAIN acceptance is NOT_ACCEPTED. No Dataset Profile execution is recorded by this Work Item.
+**Status:** NOT_ESTABLISHED / NOT_ACCEPTED
+**Authority:** STUDENT-MAIN Brain
+**Work Item:** M1_DATASET_PROFILE_001
+**Related Work Item:** M1_GOVERNANCE_STATUS_CLARIFICATION_001
+**Evidence:** The required status supplied in M1_GOVERNANCE_STATUS_CLARIFICATION_001. No analysis evidence or acceptance artifact was supplied.
+
+## D016 — M2–M5 remain locked
+
+**Decision:** M2_STATUS is LOCKED; M2_RELEASE is NOT_AUTHORIZED; M3–M5 remain LOCKED.
+**Status:** LOCKED
+**Authority:** STUDENT-MAIN Brain
+**Work Item:** M1_GOVERNANCE_STATUS_CLARIFICATION_001
+**Evidence:** The explicit MAIN status in this dispatched Work Item.

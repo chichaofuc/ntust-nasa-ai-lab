@@ -70,7 +70,7 @@ STUDENT-MAIN Brain
 **Execution status:** NOT STARTED. Dataset Profile work must not begin until this governance update is pushed, remotely verified, and reviewed for dispatch by MAIN.
 **M2–M5:** LOCKED.
 
-## Current Active Work Item
+## Historical Authorization Record — M1_DATASET_PROFILE_001
 
 **PROJECT:** NTUST NASA AI Lab
 **CURRENT_MILESTONE:** M1_SYNTHETIC_DATASET_PROFILE
@@ -80,3 +80,45 @@ STUDENT-MAIN Brain
 **STATUS:** AUTHORIZED_BUT_BLOCKED_PENDING_GOVERNANCE_SYNC
 
 This Work Item is authorized for the M1 Dataset Profile only after governance synchronization and MAIN review/dispatch. No M1 analysis has been performed under M1_GOVERNANCE_SYNC_001.
+
+## M1 Governance Sync — Execution and Acceptance Status
+
+**Work Item:** M1_GOVERNANCE_SYNC_001
+**Result:** PASS_WITH_NOTES.
+**MAIN acceptance:** PENDING.
+**Verified baseline commit:** 7e95db3494567f96bb6546df8456d150c40551eb.
+**Evidence:** This commit was the expected GitHub main HEAD at clarification dispatch. Its parent is the original M0 commit 16b017d69fd0b60e538032bc2c6082af558e22f2. The current status values below are supplied by M1_GOVERNANCE_STATUS_CLARIFICATION_001; no MAIN acceptance of the Governance Sync is claimed here.
+
+## Current Governance Status
+
+M0_STATUS: ACCEPTED
+
+M1_GOVERNANCE_SYNC:
+  STATUS: PASS_WITH_NOTES
+  MAIN_ACCEPTANCE: PENDING
+
+M1_GOVERNANCE_STATUS_CLARIFICATION:
+  STATUS: AUTHORIZED
+  EXECUTION: IN_PROGRESS_UNTIL_VERIFIED
+
+M1_DATASET_PROFILE:
+  DOMAIN_ACCEPTANCE: NOT_ESTABLISHED
+  MAIN_ACCEPTANCE: NOT_ACCEPTED
+
+M2_STATUS: LOCKED
+M2_RELEASE: NOT_AUTHORIZED
+
+M3_M5_STATUS: LOCKED
+
+## Current Active Work Item
+
+**PROJECT:** NTUST NASA AI Lab
+**CURRENT_MILESTONE:** M1_SYNTHETIC_DATASET_PROFILE
+**ACTIVE_WORK_ITEM:** M1_GOVERNANCE_STATUS_CLARIFICATION_001
+**RELATED_WORK_ITEM:** M1_DATASET_PROFILE_001
+**WORK_ITEM_TYPE:** BOUNDED_GOVERNANCE_UPDATE
+**TARGET:** Research Own Worker (Codex)
+**STATUS:** AUTHORIZED
+**EXECUTION:** IN_PROGRESS_UNTIL_VERIFIED
+
+This Work Item updates governance status only. M1 Dataset Profile remains NOT_ACCEPTED and has not been executed or dispatched. M2–M5 remain LOCKED.

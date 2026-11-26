@@ -1,6 +1,6 @@
 # NTUST NASA AI Lab — Roadmap
 
-The project follows milestone-controlled, sequential development. M0 is ACCEPTED. M1 is AUTHORIZED under M1_DATASET_PROFILE_001 but remains blocked from Dataset Profile execution until this governance synchronization is pushed and verified and MAIN reviews and dispatches that Work Item. M2–M5 remain LOCKED pending their prerequisites, acceptance, and explicit MAIN authorization.
+The project follows milestone-controlled, sequential development. M0 is ACCEPTED. M1 Governance Sync is PASS_WITH_NOTES with MAIN acceptance PENDING. M1 Governance Status Clarification is AUTHORIZED and IN_PROGRESS_UNTIL_VERIFIED. M1 Dataset Profile is NOT_ACCEPTED and its domain acceptance is NOT_ESTABLISHED. M2 is LOCKED with release NOT_AUTHORIZED; M3–M5 are LOCKED.
 
 ## M0 — Project Governance & Environment Initialization
 
@@ -20,11 +20,11 @@ The project follows milestone-controlled, sequential development. M0 is ACCEPTED
 
 **Acceptance:** Every reported result is derived from the actual dataset; no analysis is fabricated.
 
-**Status:** AUTHORIZED, but execution is blocked pending governance synchronization and MAIN review/dispatch. The only authorized Work Item is M1_DATASET_PROFILE_001.
+**Status:** M1 Governance Sync is PASS_WITH_NOTES; MAIN acceptance is PENDING. The Governance Status Clarification is AUTHORIZED under M1_GOVERNANCE_STATUS_CLARIFICATION_001 and remains IN_PROGRESS_UNTIL_VERIFIED. M1 Dataset Profile is NOT_ACCEPTED; domain acceptance is NOT_ESTABLISHED. Do not execute or dispatch the profile under this clarification Work Item.
 
 ## M2 — Data Pipeline & Sensor Analysis Engine
 
-**Status:** LOCKED pending M1 acceptance and explicit MAIN authorization.
+**Status:** LOCKED; M2_RELEASE is NOT_AUTHORIZED.
 
 **Objective:** Build reusable data loading, filtering, and analysis modules.
 
@@ -62,4 +62,4 @@ The project follows milestone-controlled, sequential development. M0 is ACCEPTED
 
 **Acceptance:** All required functionality works on actual FD001 data, with reproducible and traceable results.
 
-**Current authorization:** M0 is ACCEPTED. M1 is AUTHORIZED only under M1_DATASET_PROFILE_001 after governance synchronization and MAIN review/dispatch. M2–M5 are LOCKED. Do not begin any milestone outside its active authorized Work Item.
+**Current authorization:** M0 is ACCEPTED. Governance Status Clarification M1_GOVERNANCE_STATUS_CLARIFICATION_001 is AUTHORIZED and IN_PROGRESS_UNTIL_VERIFIED. M1 Dataset Profile is NOT_ACCEPTED and domain acceptance is NOT_ESTABLISHED. M2 is LOCKED with release NOT_AUTHORIZED; M3–M5 are LOCKED.

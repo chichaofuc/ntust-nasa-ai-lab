@@ -52,8 +52,11 @@ Never expose or commit secrets, tokens, or private keys. Never embed credentials
 
 ## Current milestone boundary
 
-- **M0 — ACCEPTED** by STUDENT-MAIN Brain. The M0 recovery and acceptance record is documented in M1_GOVERNANCE_SYNC_001.
-- **M1 — AUTHORIZED, PENDING GOVERNANCE SYNCHRONIZATION AND MAIN REVIEW.** The active Work Item is M1_DATASET_PROFILE_001. Dataset Profile execution may begin only after this governance synchronization is pushed and verified and MAIN reviews and dispatches that Work Item. Follow its scope exactly.
-- **M2–M5 — LOCKED.** Do not begin these milestones until their prerequisites are accepted and MAIN issues explicit authorization.
+- **M0:** ACCEPTED.
+- **M1 Governance Sync:** PASS_WITH_NOTES; MAIN acceptance is PENDING.
+- **M1 Governance Status Clarification:** AUTHORIZED; execution is IN_PROGRESS_UNTIL_VERIFIED under M1_GOVERNANCE_STATUS_CLARIFICATION_001.
+- **M1 Dataset Profile:** NOT_ACCEPTED; domain acceptance is NOT_ESTABLISHED. Do not execute or dispatch the profile under the governance-status clarification Work Item.
+- **M2:** LOCKED; M2_RELEASE is NOT_AUTHORIZED.
+- **M3–M5:** LOCKED.
 
-This authorization covers only M1 Dataset Profile under M1_DATASET_PROFILE_001 after the stated gate. It does not authorize M2 or later milestones, website work, unrelated analysis, or scope expansion. Source datasets remain read-only and must not be modified.
+M1 Dataset Profile work remains governed by M1_DATASET_PROFILE_001 and requires its own authorized dispatch and acceptance. No M2 or later work is authorized.
