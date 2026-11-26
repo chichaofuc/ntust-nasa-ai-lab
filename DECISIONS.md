@@ -151,3 +151,16 @@
 **Scope:** Read-only API in the student's workspace using only the three M2-verified FD001 original files; required endpoints are /api/health, /api/catalog, /api/units, and /api/history. API responses must define success/error behavior, represent missing values as JSON null, and provide original source-file plus 1-based physical source-line provenance.  
 **Data exclusion:** GEN-001 and all Ch12 synthetic CSV files are explicitly prohibited from API implementation, fixtures, tests, examples, and outputs.  
 **Gate:** The Web Brain must read the latest AGENTS.md from GitHub main and verify synchronized governance before issuing the formal Worker command. M4–M5 remain LOCKED.
+
+
+## D022 — M3 FD001 Read-only API acceptance and closure
+
+**Decision:** M3_FD001_READONLY_API_001 is ACCEPTED_WITH_NOTES and CLOSED. The decision is based on the STUDENT-WEB Brain's PASS_WITH_NOTES review of the remote implementation, API contract, tests, source-row reconciliation code/report, execution log, and Git commit ancestry.  
+**Status:** ACCEPTED_WITH_NOTES / CLOSED  
+**Authority:** STUDENT-MAIN Brain  
+**Work Item:** M3_FD001_READONLY_API_001  
+**Reported implementation commit:** 84ddd697aef5af67678b0e850779a6bc67983684  
+**Reported final remote HEAD:** 6572ddfeec2c728b17cde424c11d91a2c7ba9aec  
+**Reported dispatch base:** f2f26d531d80e6afe4a6f134ca70a7906b2c2065  
+**Acceptance notes:** Web Brain reports 17 automated tests passing and 40/40 Train/Test source-row reconciliation matches, and reviewed the corresponding program and report. Web Brain could not directly access the student's local original FD001 files to rerun reconciliation. MAIN therefore records these as reviewed Worker evidence, not as independent MAIN-side raw-data verification. MAIN does not claim to have rerun the API tests or accessed the local source files.  
+**Boundary:** M3 API scope only. M4–M5 remain LOCKED and require separate explicit MAIN authorization.
