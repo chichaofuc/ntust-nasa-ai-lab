@@ -164,3 +164,16 @@
 **Reported dispatch base:** f2f26d531d80e6afe4a6f134ca70a7906b2c2065  
 **Acceptance notes:** Web Brain reports 17 automated tests passing and 40/40 Train/Test source-row reconciliation matches, and reviewed the corresponding program and report. Web Brain could not directly access the student's local original FD001 files to rerun reconciliation. MAIN therefore records these as reviewed Worker evidence, not as independent MAIN-side raw-data verification. MAIN does not claim to have rerun the API tests or accessed the local source files.  
 **Boundary:** M3 API scope only. M4–M5 remain LOCKED and require separate explicit MAIN authorization.
+
+
+## D023 — M4 FD001 Interactive Web UI and Source Traceability authorization
+
+**Decision:** `M4_FD001_INTERACTIVE_WEB_UI_001` is FORMALLY AUTHORIZED. Web Brain may inspect the accepted M3 API and M2 Data Contract, then prepare a bounded Worker dispatch command. The Worker has not yet been dispatched.
+**Status:** FORMALLY_AUTHORIZED / CREATED_NOT_DISPATCHED
+**Authority:** STUDENT-MAIN Brain
+**Related Work Item:** M3_FD001_READONLY_API_001 (ACCEPTED_WITH_NOTES / CLOSED)
+**Scope:** Build a runnable, real-browser interactive UI using the accepted M3 FD001 API, with Engine Unit, Cycle range, Sensor selection, trend chart, and matching source-row display including original source provenance. Require actual browser/human-operation UAT and row-level UI/API/original CSV reconciliation for train and test.
+**Evidence requirement:** Deliver actual startup command and runtime URL, browser-operation trace/log or video plus supporting screenshots, and a row-by-row comparison of UI values, API JSON/provenance, and exact original CSV physical line/column. Static screenshots alone are insufficient.
+**Data boundary:** Use M3 API as the UI data interface; original FD001 CSV files remain read-only and may be used only for controlled reconciliation. GEN-001 and all Ch12 synthetic CSVs are prohibited. No M3 API contract changes, model training, diagnosis, Evidence Prompt Generator, or M5 integration are authorized.
+**Dispatch gate:** Web Brain must read latest AGENTS.md, M3 API implementation/contract, and M2 Data Contract from GitHub main before preparing the complete Worker command. Worker execution begins only after Owner pastes the command marked COMMAND_DISPATCHED.
+**M5:** Remains LOCKED.
