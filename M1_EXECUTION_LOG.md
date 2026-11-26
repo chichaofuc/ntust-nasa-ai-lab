@@ -1,66 +1,122 @@
-# M1 Execution Log — Supplemental Partial Validation
+# M1 Execution Log — Recomputed Synthetic CSV Profile
 
 **Work Item:** `M1_DATASET_PROFILE_001`
-**Execution status:** `PARTIAL`; six-input requirement not met.
-**Execution time:** 2026-11-26 18:53:10 Asia/Taipei (UTC+08:00), analysis and source-hash recheck.
+**Execution:** Completed for the single authorized logical dataset; returned for independent Research Brain review.
+**Analysis start / finish:** 2026-11-26 19:08:30 +08:00 (Asia/Taipei).
 **Project root:** `C:\Users\as555\Desktop\20261123_AI\20261123_AI`
-**Branch:** `main`
-**Remote baseline HEAD:** `9e070fcfb033b90d0bd3952487b53cfae60a5708`
+**Branch / baseline HEAD:** `main` / `318b51a2244833a7310638847d89c8e08f431310`
+**Source:** `data/synthetic_sensor.csv`.
+**Source size:** 234 bytes.
+**SHA-256 before / after:** `CD536B46EB628909FDC986BBAD956C24A2E50AFB287968998374BEFC62204377` / same.
+**Python:** 3.13.14.
+**Packages:** Python standard library only (`csv`, `hashlib`, `json`, `math`, `platform`, `re`, `statistics`, `sys`, `collections`, `datetime`, `pathlib`); no third-party packages.
 
-## Preserved prior stop evidence
+## Governance and pre-execution checks
 
-The earlier inventory-only STOP record stated that one candidate CSV was found and no file content had been read. That was accurate for that earlier run. The Owner subsequently confirmed that `data/synthetic_sensor.csv` and historical `data/intro/synthetic_sensor.csv` identify one logical dataset, and the dispatched supplemental validation authorizes inspection. This run preserves the earlier record here as chronology; its updated status is superseded by the actual supplemental observations in this log and `M1_BASIC_PROFILE.md`, without claiming six files exist.
+- Before local data access, fetched current GitHub `main` versions of `AGENTS.md`, `ROADMAP.md`, `WORK_ITEM.md`, and `DECISIONS.md` and checked remote `refs/heads/main`.
+- Remote HEAD was `318b51a2244833a7310638847d89c8e08f431310`, equal to the authorized baseline. Governance preserves M1 as unaccepted pending profile review and M2–M5 as locked.
+- Local `git branch --show-current` returned `main`; `git rev-parse HEAD` returned the baseline SHA above.
+- Pre-edit `git status --short` showed only known untracked user files: `.DS_Store`, presentation files, and `data/`. No tracked modifications were present. The three reports were tracked at baseline. These known untracked items were preserved.
+- The source resolved to `C:\Users\as555\Desktop\20261123_AI\20261123_AI\data\synthetic_sensor.csv`, existed, and was read successfully.
 
-## Governance and repository preflight
+## Correction to prior report revision
 
-- Fetched GitHub `main` HEAD and all four governance files (`AGENTS.md`, `ROADMAP.md`, `WORK_ITEM.md`, `DECISIONS.md`) before local data access.
-- Remote HEAD matched expected `9e070fcfb033b90d0bd3952487b53cfae60a5708`; local `main` and `origin/main` were at that baseline.
-- Governance records authorize M1 dataset profiling; M2–M5 remain locked. No governance files were changed.
-- Working tree had only pre-existing untracked project files, including the three assigned deliverables and `data/`; tracked tree was clean.
+The prior report revision described six expected datasets and a 1/6 input count. That was incorrect for the current authorization: six refers to data records in one CSV, not six CSV datasets. The current profile replaces that mistaken interpretation with one logical dataset containing six records. No additional datasets were searched for or created.
 
-## Inventory and source integrity
+## Reproducible execution
 
-- Recursive CSV inventory excluding `.git`: 2 paths total, consisting of one source CSV and the generated `M1_FILE_INVENTORY.csv` deliverable. The generated deliverable is excluded from dataset input counts.
-- Actual source input: `data/synthetic_sensor.csv`, 234 bytes; logical dataset count 1; intended count 6; five intended datasets absent.
-- The historical alias `data/intro/synthetic_sensor.csv` is absent locally and, per Owner confirmation, is not a second logical dataset.
-- Source SHA-256 before analysis: `CD536B46EB628909FDC986BBAD956C24A2E50AFB287968998374BEFC62204377`.
-- Source SHA-256 after analysis: `CD536B46EB628909FDC986BBAD956C24A2E50AFB287968998374BEFC62204377`.
-- Source size after analysis: 234 bytes. Hash and size match; no source write was performed.
-- Source remains untracked and must not be committed.
+PowerShell resolved `$source` as `(Resolve-Path -LiteralPath 'data\synthetic_sensor.csv').Path`, stored the following complete Python source in a single-quoted here-string, and piped it to `python - $source`. The exact executable source is included verbatim below.
 
-## Environment and tools
+```python
+import csv, hashlib, json, math, platform, re, statistics, sys
+from collections import Counter
+from datetime import datetime
+from pathlib import Path
+started = datetime.now().astimezone().isoformat(timespec='seconds')
+path = Path(sys.argv[1]).resolve(strict=True)
+raw_before = path.read_bytes()
+sha_before = hashlib.sha256(raw_before).hexdigest().upper()
+text = raw_before.decode('utf-8-sig')
+records = list(csv.reader(text.splitlines(), delimiter=',', strict=True))
+if not records: raise ValueError('CSV is empty')
+header, body = records[0], records[1:]
+if any(len(row) != len(header) for row in body): raise ValueError('Malformed CSV: row width differs from header')
+missing = {name: sum(not row[i].strip() for row in body) for i, name in enumerate(header)}
+rows_missing = sum(any(not value.strip() for value in row) for row in body)
+counts = Counter(tuple(row) for row in body)
+dup_groups = [{'row': list(row), 'count': n} for row, n in counts.items() if n > 1]
+dup_excess = sum(n-1 for n in counts.values() if n > 1)
+dup_cols = sorted(name for name,n in Counter(header).items() if n > 1)
+fields=[]
+for i,name in enumerate(header):
+ vals=[r[i].strip() for r in body]; present=[v for v in vals if v]
+ nums=[]; all_num=bool(present); all_int=bool(present)
+ for v in present:
+  try:
+   x=float(v)
+   if not math.isfinite(x): all_num=False; all_int=False
+   else:
+    nums.append(x)
+    if not re.fullmatch(r'[+-]?\d+',v): all_int=False
+  except ValueError: all_num=False; all_int=False
+ dtype='empty' if not present else ('int' if all_num and all_int else 'float' if all_num else 'string')
+ stats=None
+ if all_num and nums:
+  stats={'count':len(nums),'min':min(nums),'max':max(nums),'mean':statistics.mean(nums),'median':statistics.median(nums),'std_sample':statistics.stdev(nums) if len(nums)>1 else None,'constant':min(nums)==max(nums)}
+ fields.append({'name':name,'dtype':dtype,'missing':missing[name],'numeric_stats':stats,'constant':len(set(present))<=1 if present else True})
+raw_after=path.read_bytes(); sha_after=hashlib.sha256(raw_after).hexdigest().upper()
+finished=datetime.now().astimezone().isoformat(timespec='seconds')
+result={'execution_started':started,'execution_finished':finished,'python':platform.python_version(),'source_path':str(path),'source_size_bytes':len(raw_before),'sha256_before':sha_before,'sha256_after':sha_after,'source_unchanged':raw_before==raw_after,'delimiter':',','data_rows':len(body),'column_count':len(header),'columns':header,'record_widths':sorted(set(map(len,body))),'fields':fields,'missing_by_column':missing,'total_missing_cells':sum(missing.values()),'rows_with_missing':rows_missing,'duplicate_rows_excess_count':dup_excess,'duplicate_row_groups':dup_groups,'duplicate_column_names':dup_cols,'constant_columns':[f['name'] for f in fields if f['constant']],'malformed_rows':0}
+print(json.dumps(result,ensure_ascii=False,indent=2))
+```
 
-- OS: Microsoft Windows NT 10.0.26100.0
-- PowerShell: 7.6.9
-- Python: 3.13.14; only Python standard library (`csv`, `json`, `math`, `re`, `statistics`, `sys`) used.
-- No third-party packages installed.
+## Captured execution evidence
 
-## Commands and procedure
+**Command:** `$code | python - $source`
+**Exit code:** `0`
+**stderr:** empty; no stderr output was observed.
+**stdout:**
 
-Commands/tools actually used in this run:
+```json
+{
+  "execution_started": "2026-11-26T19:08:30+08:00",
+  "execution_finished": "2026-11-26T19:08:30+08:00",
+  "python": "3.13.14",
+  "source_path": "C:\\Users\\as555\\Desktop\\20261123_AI\\20261123_AI\\data\\synthetic_sensor.csv",
+  "source_size_bytes": 234,
+  "sha256_before": "CD536B46EB628909FDC986BBAD956C24A2E50AFB287968998374BEFC62204377",
+  "sha256_after": "CD536B46EB628909FDC986BBAD956C24A2E50AFB287968998374BEFC62204377",
+  "source_unchanged": true,
+  "delimiter": ",",
+  "data_rows": 6,
+  "column_count": 4,
+  "columns": ["timestamp", "load_pct", "coolant_out_c", "oil_pressure_bar"],
+  "record_widths": [4],
+  "fields": [
+    {"name": "timestamp", "dtype": "string", "missing": 0, "numeric_stats": null, "constant": false},
+    {"name": "load_pct", "dtype": "int", "missing": 0, "numeric_stats": {"count": 6, "min": 50.0, "max": 70.0, "mean": 63.333333333333336, "median": 70.0, "std_sample": 10.327955589886445, "constant": false}, "constant": false},
+    {"name": "coolant_out_c", "dtype": "int", "missing": 0, "numeric_stats": {"count": 6, "min": 78.0, "max": 84.0, "mean": 81.66666666666667, "median": 82.5, "std_sample": 2.581988897471611, "constant": false}, "constant": false},
+    {"name": "oil_pressure_bar", "dtype": "float", "missing": 1, "numeric_stats": {"count": 5, "min": 3.8, "max": 4.0, "mean": 3.9, "median": 3.9, "std_sample": 0.10000000000000009, "constant": false}, "constant": false}
+  ],
+  "missing_by_column": {"timestamp": 0, "load_pct": 0, "coolant_out_c": 0, "oil_pressure_bar": 1},
+  "total_missing_cells": 1,
+  "rows_with_missing": 1,
+  "duplicate_rows_excess_count": 1,
+  "duplicate_row_groups": [{"row": ["2026-01-01T10:04:00", "70", "84", "3.8"], "count": 2}],
+  "duplicate_column_names": [],
+  "constant_columns": [],
+  "malformed_rows": 0
+}
+```
 
-- GitHub MCP: fetched `refs/heads/main` and the four governance files.
-- `Resolve-Path -LiteralPath 'data\\synthetic_sensor.csv'`
-- `Get-FileHash -Algorithm SHA256 -LiteralPath 'data\\synthetic_sensor.csv'`
-- `Get-Item -LiteralPath 'data\\synthetic_sensor.csv' | Select-Object Length,LastWriteTime`
-- `Get-Content -LiteralPath 'data\\synthetic_sensor.csv'` (read only)
-- Python standard-library parser supplied via PowerShell pipeline: `python - $src`; `csv.Sniffer` chose comma, `csv.reader(..., strict=True)` parsed records, and script computed schema shape, row/column duplicates, missing values, inferred primitive types, nonnumeric/nonfinite counts, constant columns and numeric descriptive statistics. Quartiles used `statistics.quantiles(..., n=4, method='inclusive')`; sample SD used `statistics.stdev`.
-- Git inspection used `git -c safe.directory=C:/Users/as555/Desktop/20261123_AI/20261123_AI status --short --branch`.
+## Interpretation rules
 
-Result: header `timestamp,load_pct,coolant_out_c,oil_pressure_bar`; 6 data records; 4 columns; 1 duplicate row; 1 missing value; 0 malformed-width records; no duplicate columns; no constant numeric columns. Full statistics are in `M1_BASIC_PROFILE.md`.
+- Duplicate count is exact full-row tuple equality on data records, excluding header; one excess duplicate row was counted.
+- A missing cell is an empty/whitespace-only field. No rows were dropped, values filled, or source cells changed.
+- Numeric types and summaries are inferred from nonmissing values. Standard deviation is sample SD. `timestamp` is treated as string; no external schema was available.
+- No duplicate column names, malformed-width rows, or constant fields were found.
+- Column names are suggestive only. Physical meaning, validated units, equipment identity, calibration, and normal operating limits remain UNKNOWN.
 
-## Deliverables
+## Git and remote verification
 
-- `M1_BASIC_PROFILE.md`: partial observed profile, evidence limitations, explicit STOP and incomplete status.
-- `M1_EXECUTION_LOG.md`: this run's environment, preflight, source hashes, procedure, prior stop chronology, and execution evidence.
-- `M1_FILE_INVENTORY.csv`: actual input and generated-output inventory with statuses and hash evidence.
-
-No original CSV, governance document, application file, or unrelated file was modified.
-
-## STOP_EVENT
-
-**Trigger:** Fewer than six intended synthetic datasets were found and verified.
-**Observed evidence:** One user-confirmed logical input exists (`data/synthetic_sensor.csv`); historical alias is the same logical dataset and absent as a path; five remaining intended inputs are not present in the inventory.
-**Impact:** Partial evidence only; M1 profile remains incomplete and no milestone acceptance is claimed.
-**Proposed action:** Return actual partial findings and inventory to STUDENT-RESEARCH Brain for review or further instruction.
-**Waiting for:** STUDENT-RESEARCH Brain.
+Git change and remote readback evidence is returned with the Worker execution report. No M1 acceptance is claimed.

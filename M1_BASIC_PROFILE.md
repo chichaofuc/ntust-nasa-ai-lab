@@ -1,42 +1,52 @@
-# M1 Basic Profile — Partial Evidence; Work Item Incomplete
+# M1 Basic Profile — Synthetic Sensor Dataset
 
 **Work Item:** `M1_DATASET_PROFILE_001`
-**Execution status:** `PARTIAL / INCOMPLETE`
-**Repository baseline:** `9e070fcfb033b90d0bd3952487b53cfae60a5708`
-**Input scope:** Synthetic CSV only. NASA C-MAPSS is out of scope.
+**Current milestone:** `M1_SYNTHETIC_DATASET_PROFILE`
+**Profile result:** One logical CSV dataset containing six data records.
+**Acceptance:** Not declared; Research Brain review is pending.
 
-## Inventory result
+## Dataset identity and source integrity
 
-The repository inventory contains **2 CSV paths including this generated inventory deliverable**. One is generated output and is not an input dataset. There is **1 verified logical synthetic dataset**: `data/synthetic_sensor.csv`. The Owner explicitly confirmed that `data/synthetic_sensor.csv` and the historical reference `data/intro/synthetic_sensor.csv` refer to the same logical dataset. The historical path does not exist locally. Thus only **1 of the 6 intended datasets** is present and verified; five intended datasets are not available. No substitute was used.
+- Logical dataset count: **1**.
+- Source: `data/synthetic_sensor.csv`.
+- Historical alias: `data/intro/synthetic_sensor.csv`; Owner confirmed it refers to the same logical dataset and must not be counted twice.
+- Resolved local path: `C:\Users\as555\Desktop\20261123_AI\20261123_AI\data\synthetic_sensor.csv`.
+- Size: **234 bytes**.
+- SHA-256 before analysis: `CD536B46EB628909FDC986BBAD956C24A2E50AFB287968998374BEFC62204377`.
+- SHA-256 after analysis: `CD536B46EB628909FDC986BBAD956C24A2E50AFB287968998374BEFC62204377`.
+- Source remained unchanged and read-only. The raw CSV was not staged or committed.
 
-The source file is 234 bytes and has SHA-256 `CD536B46EB628909FDC986BBAD956C24A2E50AFB287968998374BEFC62204377` both before and after reading. It remains unmodified and untracked.
+## Shape and schema
 
-## Observations — actual file
+The comma-delimited CSV has a header and **6 data rows × 4 columns**. Each row has four fields; no malformed-width rows were found. Types below are inferred from nonmissing cell values using Python built-ins, not from an external schema.
 
-Parsing used Python's standard-library `csv` module with strict row parsing. The file is valid UTF-8 CSV, comma-delimited, with header plus 6 data rows and 4 columns. One exact duplicate data row is present (the two `2026-01-01T10:04:00,70,84,3.8` records). There are no duplicate column names and no malformed rows. There are no entirely blank rows. One field value is missing: `oil_pressure_bar` in the `10:03` row. No non-numeric values occur in numeric columns; the `timestamp` field is textual and looks timestamp-shaped, but was not assigned a datetime type by schema or contract. Column types below are inferred from observed values only.
+| Column | Inferred dtype | Data values | Missing | Min | Max | Mean | Median | Sample SD | Constant |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---|
+| `timestamp` | string | 6 | 0 | N/A | N/A | N/A | N/A | N/A | No |
+| `load_pct` | integer | 6 | 0 | 50 | 70 | 63.333333 | 70 | 10.327956 | No |
+| `coolant_out_c` | integer | 6 | 0 | 78 | 84 | 81.666667 | 82.5 | 2.581989 | No |
+| `oil_pressure_bar` | float | 5 | 1 | 3.8 | 4.0 | 3.9 | 3.9 | 0.1 | No |
 
-| Field | Inferred type | Missing | Non-numeric/non-finite | Min | Q1 | Median | Q3 | Max | Mean | Sample SD | Constant |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| `timestamp` | string | 0 | 6 (expected nonnumeric for string) | — | — | — | — | — | — | — | No |
-| `load_pct` | integer-like | 0 | 0 | 50 | 55 | 70 | 70 | 70 | 63.3333 | 10.3280 | No |
-| `coolant_out_c` | integer-like | 0 | 0 | 78 | 79.75 | 82.5 | 83.75 | 84 | 81.6667 | 2.5820 | No |
-| `oil_pressure_bar` | numeric | 1 | 0 | 3.8 | 3.8 | 3.9 | 4.0 | 4.0 | 3.9 | 0.1000 | No |
+Standard deviation is sample standard deviation (`statistics.stdev`). Numeric statistics exclude missing values. No column names are duplicated.
 
-Quartiles use inclusive linear interpolation. Standard deviation is sample SD; for timestamp, numeric statistics are not applicable. Duplicate-column check was exact header equality. Missing check treats empty/whitespace-only cells as missing. No domain schema or valid ranges were supplied, so domain-invalid values cannot be determined.
+## Duplicate and missing-value results
 
-## Semantics and limits
+- Duplicate definition: two data records are duplicates only when their complete field tuples, including string values and blanks, are exactly equal. Header is excluded.
+- Exact duplicate excess rows: **1** (one repeated row beyond its first occurrence).
+- Duplicate group: `2026-01-01T10:04:00,70,84,3.8` occurs twice.
+- Missing cells are empty or whitespace-only CSV fields.
+- Missing by column: `timestamp` 0; `load_pct` 0; `coolant_out_c` 0; `oil_pressure_bar` 1.
+- Total missing cells: **1**; rows containing at least one missing cell: **1**.
+- Constant columns: **none**.
 
-**OBSERVATION:** The header names suggest timestamp, load percentage, coolant outlet temperature in degrees C, and oil pressure in bar. Timestamp strings advance by one minute from 10:00 through 10:04, with the final timestamp repeated once. The values in load and coolant fields change across these six rows; oil pressure has one missing reading and otherwise ranges from 3.8 to 4.0.
+## Data-quality observations and limits
 
-**INFERENCE:** The rows may represent time-ordered measurements, based on the `timestamp` header and observed minute-spaced values. This is only a name/value-pattern inference; equipment identity, sensor calibration, sampling policy, and operational context are not established.
+**OBSERVATION:** Six data rows and four columns were parsed. One exact repeated row and one blank `oil_pressure_bar` cell were found. Timestamps run from 10:00 to 10:04 at minute intervals, with 10:04 appearing in two rows. Numeric ranges and summaries are shown above.
 
-**UNKNOWN:** Actual field definitions, units/measurement accuracy, equipment or sensor identity, expected time cadence, validity limits, and whether any value indicates abnormality. No health baseline or fault threshold is established. These observations do not diagnose equipment or sensor faults.
+**INFERENCE:** The timestamp-shaped values and column names suggest time-indexed sensor readings. This is a limited interpretation of field names and values only.
 
-## Stop event and status
+**UNKNOWN:** No data dictionary or independent source establishes equipment identity, calibration, sampling guarantees, operating context, exact field semantics, or valid/normal ranges. The column names suggest units, but those units are not independently verified. These descriptive statistics do not establish a health baseline, fault threshold, diagnosis, or equipment health state.
 
-**STOP_EVENT:** Fewer than six intended datasets were verified.
-**Observed evidence:** One logical source dataset at `data/synthetic_sensor.csv`; five expected datasets are absent from the discovered input inventory.
-**Impact:** This is partial profiling only. `M1_DATASET_PROFILE_001` is not complete and is not accepted; no later milestone is authorized.
-**Waiting for:** STUDENT-RESEARCH Brain review/instruction.
+## Status
 
-Previous stop evidence is retained in `M1_EXECUTION_LOG.md`; this profile records the supplemental run and does not replace historical governance records.
+This report profiles the one authorized logical dataset and its six records. M1 remains subject to independent Research Brain review; this Worker does not declare M1 accepted.
