@@ -61,4 +61,4 @@ Never expose or commit secrets, tokens, or private keys. Never embed credentials
 - **M4 Interactive Web UI & Source Traceability:** FORMALLY AUTHORIZED under `M4_FD001_INTERACTIVE_WEB_UI_001`; Worker remains NOT_DISPATCHED until Owner pastes the formal command.
 - **M5:** LOCKED.
 
-M1 Dataset Profile is accepted with notes; domain acceptance is established. M2 FD001 Local Data Validation is ACCEPTED_WITH_NOTES. M3 Health Analysis Web MVP is ACCEPTED_WITH_NOTES and M3_FD001_READONLY_API_001 is CLOSED. M4–M5 remain LOCKED and are not authorized.
+M1 Dataset Profile is accepted with notes; domain acceptance is established. M2 FD001 Local Data Validation is ACCEPTED_WITH_NOTES. M3 Health Analysis Web MVP is ACCEPTED_WITH_NOTES and M3_FD001_READONLY_API_001 is CLOSED. M4 Interactive Web UI & Source Traceability is FORMALLY AUTHORIZED under M4_FD001_INTERACTIVE_WEB_UI_001 (CREATED_NOT_DISPATCHED); M5 remains LOCKED.
