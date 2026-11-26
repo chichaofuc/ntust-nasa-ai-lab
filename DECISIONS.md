@@ -131,3 +131,23 @@
 **Authority:** STUDENT-MAIN Brain  
 **Work Item:** M2_FD001_LOCAL_DATA_VALIDATION_001  
 **Evidence:** Complete formal MAIN work order issued on 2026-11-26. Inputs are limited to the Owner's existing local train_FD001.txt, test_FD001.txt, and RUL_FD001.txt. No data download/substitution, raw-source modification/commit, model training, website/API integration, or scope expansion is authorized.
+
+
+## D020 — M2 FD001 Local Data Validation acceptance
+
+**Decision:** M2_FD001_LOCAL_DATA_VALIDATION_001 is ACCEPTED_WITH_NOTES. Phase A and Phase B deliverables, the revised R1–R3 items, and the M2 Data Contract are accepted with notes based on the Research Brain final review and its reported GitHub remote readback.  
+**Status:** ACCEPTED_WITH_NOTES / CLOSED  
+**Authority:** STUDENT-MAIN Brain  
+**Work Item:** M2_FD001_LOCAL_DATA_VALIDATION_001  
+**Final reported commit:** 599330b39b9a484ec89115e21ea5977dd1d5be71  
+**Evidence basis:** Research Brain final Return and independent review as reported to MAIN. This record does not claim a separate independent MAIN-side source-file verification.
+
+## D021 — M3 FD001 Read-only API authorization
+
+**Decision:** M3_FD001_READONLY_API_001 is FORMALLY AUTHORIZED. Web Brain may coordinate and prepare the bounded Worker dispatch command after governance synchronization and remote readback. Worker execution is not yet dispatched.  
+**Status:** FORMALLY_AUTHORIZED / CREATED_NOT_DISPATCHED  
+**Authority:** STUDENT-MAIN Brain  
+**Related Work Item:** M2_FD001_LOCAL_DATA_VALIDATION_001  
+**Scope:** Read-only API in the student's workspace using only the three M2-verified FD001 original files; required endpoints are /api/health, /api/catalog, /api/units, and /api/history. API responses must define success/error behavior, represent missing values as JSON null, and provide original source-file plus 1-based physical source-line provenance.  
+**Data exclusion:** GEN-001 and all Ch12 synthetic CSV files are explicitly prohibited from API implementation, fixtures, tests, examples, and outputs.  
+**Gate:** The Web Brain must read the latest AGENTS.md from GitHub main and verify synchronized governance before issuing the formal Worker command. M4–M5 remain LOCKED.
