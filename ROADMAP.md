@@ -1,6 +1,6 @@
 # NTUST NASA AI Lab — Roadmap
 
-The project follows milestone-controlled, sequential development. M0 is ACCEPTED. M1 Governance Sync and M1 Governance Status Clarification are ACCEPTED_WITH_NOTES. M1 Dataset Profile is ACCEPTED_WITH_NOTES and M1 Domain Acceptance is ESTABLISHED by formal MAIN authorization. M2 FD001 Local Data Validation is ACCEPTED_WITH_NOTES by STUDENT-MAIN. M3 Health Analysis Web MVP is ACCEPTED_WITH_NOTES under M3_FD001_READONLY_API_001. M4–M5 remain LOCKED.
+The project follows milestone-controlled, sequential development. M0 is ACCEPTED. M1 Governance Sync and M1 Governance Status Clarification are ACCEPTED_WITH_NOTES. M1 Dataset Profile is ACCEPTED_WITH_NOTES and M1 Domain Acceptance is ESTABLISHED by formal MAIN authorization. M2 FD001 Local Data Validation is ACCEPTED_WITH_NOTES by STUDENT-MAIN. M3 Health Analysis Web MVP is ACCEPTED_WITH_NOTES under M3_FD001_READONLY_API_001. M4 Interactive Web UI & Source Traceability is FORMALLY AUTHORIZED under `M4_FD001_INTERACTIVE_WEB_UI_001` (CREATED_NOT_DISPATCHED); M5 remains LOCKED.
 
 ## M0 — Project Governance & Environment Initialization
 
@@ -42,19 +42,19 @@ The project follows milestone-controlled, sequential development. M0 is ACCEPTED
 
 **Acceptance:** UI results match the underlying data and analysis engine.
 
-## M4 — Evidence & Traceability System
+## M4 — Interactive Web UI & Source Traceability
 
-**Status:** LOCKED pending its prerequisites, acceptance, and explicit MAIN authorization.
+**Status:** FORMALLY AUTHORIZED under `M4_FD001_INTERACTIVE_WEB_UI_001`; Worker dispatch remains pending Owner paste.
 
-**Objective:** Generate evidence traceable to original source data.
+**Objective:** Build a real, interactive browser UI on the accepted M3 FD001 read-only API, supporting Engine Unit, Cycle range, Sensor selection, trend visualization, and source-row display.
 
-**Deliverables:** Evidence Schema; Source References; Statistical Evidence; Evidence Prompt Generator; Copyable AI Prompt.
+**Deliverables:** Runnable frontend; startup command and actual URL; browser/human-operation UAT trace; UI/API/original CSV row-level reconciliation; UI contract and execution evidence.
 
-**Acceptance:** Evidence accurately reflects selections and source data.
+**Acceptance:** Real-browser operations prove that selections update the chart and source rows consistently, and representative train/test values match API provenance and exact original CSV physical lines. Static screenshots alone are insufficient.
 
 ## M5 — NASA C-MAPSS FD001 Integration & Final Validation
 
-**Status:** LOCKED pending its prerequisites, acceptance, and explicit MAIN authorization.
+**Status:** LOCKED pending M4 acceptance and separate explicit MAIN authorization.
 
 **Objective:** Integrate NASA C-MAPSS FD001 and complete the final Engine Health Analysis application.
 
@@ -62,4 +62,4 @@ The project follows milestone-controlled, sequential development. M0 is ACCEPTED
 
 **Acceptance:** All required functionality works on actual FD001 data, with reproducible and traceable results.
 
-**Current authorization:** M0 is ACCEPTED. M1 Dataset Profile is ACCEPTED_WITH_NOTES and M1 Domain Acceptance is ESTABLISHED. M2 FD001 Local Data Validation is ACCEPTED_WITH_NOTES. M3 Health Analysis Web MVP is ACCEPTED_WITH_NOTES under M3_FD001_READONLY_API_001. M4–M5 remain LOCKED.
+**Current authorization:** M0 is ACCEPTED. M1 Dataset Profile is ACCEPTED_WITH_NOTES and M1 Domain Acceptance is ESTABLISHED. M2 FD001 Local Data Validation is ACCEPTED_WITH_NOTES. M3 Health Analysis Web MVP is ACCEPTED_WITH_NOTES under M3_FD001_READONLY_API_001. M4 Interactive Web UI & Source Traceability is FORMALLY AUTHORIZED / CREATED_NOT_DISPATCHED; M5 remains LOCKED.
