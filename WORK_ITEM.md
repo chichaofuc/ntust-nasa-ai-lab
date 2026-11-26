@@ -322,4 +322,4 @@ Any source file is missing; SHA-256 differs from M2 accepted inventory; M2 Data 
 - Worker Return → Web Brain independent review → STUDENT-MAIN acceptance.
 - No PASS or M3 completion may be claimed before actual pushed-file readback and source-row reconciliation evidence.
 
-**Current status:** M3 FORMALLY AUTHORIZED; GOVERNANCE SYNC IN PROGRESS; Web Own Worker NOT_DISPATCHED.
+**Current status:** M2 ACCEPTED_WITH_NOTES; M3 FORMALLY AUTHORIZED; GOVERNANCE SYNC COMPLETED AND REMOTELY READ BACK; Web Own Worker NOT_DISPATCHED; M4–M5 LOCKED.
