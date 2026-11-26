@@ -359,3 +359,101 @@ Reviewed items reported by Web Brain:
 ### Next milestone boundary
 
 M3_FD001_READONLY_API_001 is CLOSED. M4 Evidence & Traceability System and M5 FD001 Integration & Final Validation remain LOCKED pending their prerequisites and separate explicit MAIN authorization.
+
+
+## Active Work Item — M4_FD001_INTERACTIVE_WEB_UI_001
+
+**PROJECT:** NTUST NASA AI Lab  
+**WORK_ITEM_ID:** M4_FD001_INTERACTIVE_WEB_UI_001  
+**CURRENT_MILESTONE:** M4_INTERACTIVE_WEB_UI_AND_SOURCE_TRACEABILITY  
+**RELATED_WORK_ITEM:** M3_FD001_READONLY_API_001  
+**M3_STATUS:** ACCEPTED_WITH_NOTES / CLOSED  
+**MAIN_DECISION:** FORMAL_AUTHORIZATION_CONFIRMED  
+**TARGET:** STUDENT-WEB Brain → Web Own Worker (Codex)  
+**WORK_ITEM_TYPE:** BOUNDED_INTERACTIVE_FRONTEND_IMPLEMENTATION_AND_BROWSER_UAT  
+**AUTHORITY:** STUDENT-MAIN Brain  
+**RETURN_TO:** STUDENT-WEB Brain  
+**COMMAND_STATUS:** CREATED_NOT_DISPATCHED
+
+### Objective
+
+在學生 workspace 中，以 M3 已驗收的 FD001 唯讀 API 為唯一資料介面，建立可由真實瀏覽器操作的互動式 Engine Health Analysis 網頁。使用者可選擇 Engine Unit、Cycle 範圍及 Sensor，查看感測器趨勢圖及對應的來源資料列，並能追溯每筆顯示資料至 API provenance 與原始 FD001 CSV 的實際列/欄。
+
+### Authorized inputs and dependencies
+
+- M3 已驗收的唯讀 API、API contract、測試及 provenance 定義；Web Brain 必須先從 GitHub `main` 讀取實際檔案並確認其啟動/整合方式。
+- M2 已接受的 FD001 Data Contract 與來源檔清單。
+- 學生 workspace 中已核驗的 `train_FD001.txt`、`test_FD001.txt`、必要時 `RUL_FD001.txt`。只可讀取，不得修改、移動、重新命名或提交原始資料。
+
+若 M3 API 的實際路由、啟動方式、回應欄位或 provenance 與本工單理解不同，先 STOP 並回報差異，不得猜測或另建一套替代 API。
+
+### Authorized scope
+
+1. 建立可啟動的互動式前端，與 M3 API 整合；不得以硬編碼資料、合成資料或直接由前端另讀 CSV 取代 API。
+2. Engine Unit 選單：由 API 的實際 Unit 清單載入；切換 Unit 後，Cycle 範圍及資料必須同步更新。
+3. Cycle 範圍選擇：可指定起訖 Cycle，遵守所選 Unit 的有效範圍，拒絕 start > end 或超出有效範圍的輸入。
+4. Sensor 選單：依 API catalog / M2 Data Contract 建立，清楚呈現 Sensor ID 與欄位名稱；遵守 M3 的 1-based Sensor ID 規則，不得自行改成 0-based。
+5. 趨勢圖：依目前 split、Unit、Cycle 範圍、Sensor 的 API 回應繪製；圖上點數、Cycle、數值須能與來源資料列逐筆核對。明確標示 split、Unit、Sensor、Cycle 範圍及單位（若來源未定義單位則不得自行添加）。
+6. 來源資料列：顯示與圖表相同查詢的逐筆資料，至少包含 Cycle、Sensor ID/欄位、數值、source_file、source_line；若 API 有回傳其他 provenance 欄位，可一併呈現。source_line 必須保留 M3 定義的原始檔 1-based physical line 語義。
+7. 操作狀態：載入中、無資料、API 錯誤、參數錯誤及資料檔不可用時，需有清楚且不誤導的畫面狀態；不得用舊資料冒充新選擇結果。
+8. 提供可複製的啟動命令、必要環境/套件說明、實際啟動後 URL、停止方式及 API base URL 設定方式。URL/port 必須以實際執行結果記錄，不得預先捏造為已驗證。
+
+### Data and scope exclusions
+
+- 唯一資料來源是 M3 FD001 API；不得以 mock、fixture、靜態 JSON、合成資料或 Ch12/GEN-001 作為展示、瀏覽器測試或正式頁面資料。
+- 不得由前端直接讀取原始 CSV 作為圖表資料；原始 CSV 僅供受控的 API/CSV 對照驗證。
+- 不得修改 M3 API 的資料語義、M2 Data Contract、來源檔或既有 API contract。若需 API 變更，STOP 並提出獨立變更需求。
+- 不包含模型訓練、故障診斷結論、預測 RUL、M5 最終整合或其他未授權功能。
+- 本工單不要求 Evidence Prompt Generator；不得以其為由擴張範圍。
+
+### Required deliverables
+
+1. 可執行的前端程式、必要設定及入口頁面。
+2. `M4_FD001_WEB_UI_CONTRACT.md`：頁面控制項、狀態流、API endpoint/參數對應、圖表與資料列欄位、錯誤處理及啟動設定。
+3. `M4_FD001_STARTUP_AND_URL.md`：實際工作目錄、環境需求、安裝命令、啟動命令、實際 URL/port、API base URL、停止命令及成功啟動證據。
+4. `M4_FD001_BROWSER_UAT.md`：真實瀏覽器或人工操作測試紀錄，包含瀏覽器/版本、時間、URL、逐步操作、預期/實際結果、通過/失敗、Console/Network 錯誤觀察及測試證據位置。
+5. `M4_FD001_API_CSV_UI_RECONCILIATION.md`：代表性查詢的 UI 顯示值、瀏覽器 Network/API JSON、API provenance、原始 CSV 精確 physical line 與欄位值的逐筆對照；至少涵蓋 train 與 test、不同 Unit、不同 Sensor 及 Cycle 範圍。若因原始檔無法存取而不能對照，必須 STOP/標記 BLOCKED，不得以推測值替代。
+6. 自動化前端測試（若適用）及實際執行命令/結果；自動化測試不能取代真實瀏覽器或人工操作 UAT。
+7. 執行紀錄：workspace、Git base/commit、變更檔清單、啟動/測試命令、實際 URL、瀏覽器操作證據、API/CSV 對照結果、原始檔未變更證據。
+
+### Mandatory real-browser / human-operation UAT
+
+必須實際啟動 API 與前端，並在真實瀏覽器中操作（可使用 Playwright/Selenium 等真實瀏覽器自動化，或由人員依步驟操作並記錄）。至少完成：
+
+- 開啟實際啟動 URL，確認頁面載入及 API 健康狀態。
+- 選擇至少兩個不同 Engine Unit，確認 Unit 切換後 Cycle 有效範圍、圖表及來源資料列更新。
+- 調整 Cycle 起訖範圍，確認圖表點與表格列只涵蓋該範圍。
+- 切換至少兩個 Sensor，確認 Sensor 欄位映射正確、圖表及表格同步更新。
+- 分別驗證 train 與 test split（若 UI 提供 split 選擇；若不提供，須在 UAT 說明實際支援範圍並提出決策，不得自行假設）。
+- 驗證無效範圍、空結果或 API 錯誤時的 UI 狀態；不得保留舊結果造成誤判。
+- 至少選取 train/test 的代表性資料點，從畫面追到 Network/API JSON 的 source_file/source_line，再對照原始 CSV 同一 physical line 與 sensor 欄位值。
+
+證據必須包含可稽核的操作軌跡（逐步人工操作紀錄，或 Playwright/Selenium trace/log/影片等）及必要畫面。**靜態截圖、設計稿、單純 HTTP/API 測試、或僅聲稱「可操作」均不足以通過 UAT。** 截圖只能作為操作軌跡的補充。
+
+### Acceptance criteria
+
+- [ ] 使用者可在真實啟動的頁面選擇 Engine Unit、Cycle 起訖範圍及 Sensor。
+- [ ] 控制項資料來自 M3 API/catalog；不使用合成或硬編碼業務資料。
+- [ ] 趨勢圖與來源資料表由同一組 API 查詢結果產生，切換條件後同步更新且不殘留舊資料。
+- [ ] 圖表每個點可對應到表格列；Cycle、Sensor、數值及 provenance 一致。
+- [ ] source_file/source_line 保留 M3 定義，且代表性 train/test 資料列可對照原始 CSV 精確列與欄。
+- [ ] 真實瀏覽器或人工操作 UAT 完成，含至少兩個 Unit、兩個 Sensor、Cycle 範圍變更及錯誤/空狀態測試。
+- [ ] 提供實際啟動命令與實際可開啟 URL/port；由執行紀錄證明，不得只提供範例 URL。
+- [ ] 提供 API JSON、畫面值及 CSV 原始列逐筆對照證據；train/test 均有代表案例。
+- [ ] 自動化測試與 UAT 命令/結果完整記錄；無未解決的 Console/Network 錯誤。
+- [ ] 原始資料、M3 API contract 及 M2 Data Contract 未被未授權修改；無 GEN-001/Ch12 synthetic data。
+- [ ] 只提交授權的前端、測試、文件及證據；推送至 GitHub `main`，Web Brain 讀回實際檔案並審查後才可推薦 PASS。
+
+### STOP_IF
+
+M3 API 檔案/啟動方式/契約無法確認；M2 Data Contract 或欄位映射不清；本機原始 FD001 檔案缺失或無法核對；需要修改 M3 API 或原始資料；需使用合成/替代資料；無法啟動真實瀏覽器 UAT；無法取得實際 URL/操作證據/API-CSV 對照；工作目錄不明；可能覆寫無關檔案；GitHub 讀取、push 或 readback 失敗；或工作範圍擴張至模型訓練、診斷或 M5。
+
+### Dispatch and review gates
+
+- 本工單為 MAIN 正式授權，**不等同 Worker 已派發或開始執行**。
+- Web Brain 必須先讀取 GitHub `main` 最新 `AGENTS.md`、本工單、M3 API 實際檔案/API contract，以及 M2 Data Contract/驗收紀錄；確認依賴可用後，才可建立完整 Worker 命令。
+- Web Brain 準備命令後，狀態仍為 `CREATED_NOT_DISPATCHED`。只有 Owner 將正式命令貼給 Web Own Worker 並標記 `COMMAND_DISPATCHED`，Worker 才可開始。
+- Worker Return → Web Brain 獨立複審（讀回實際 push 檔案、核對瀏覽器操作軌跡與 API/CSV 對照）→ STUDENT-MAIN 最終驗收。
+- 不得以靜態截圖或 Worker 自述取代實際 UAT 證據；未滿足任一必要驗收條件不得宣告 PASS。
+
+**Current status:** M3 ACCEPTED_WITH_NOTES / CLOSED; M4 FORMALLY AUTHORIZED / CREATED_NOT_DISPATCHED; M5 LOCKED.
