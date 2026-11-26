@@ -221,7 +221,7 @@ Research Brain is explicitly authorized to synchronize the four governance files
 **WORK_ITEM_TYPE:** BOUNDED_READONLY_API_IMPLEMENTATION  
 **AUTHORITY:** STUDENT-MAIN Brain  
 **RETURN_TO:** STUDENT-WEB Brain  
-**COMMAND_STATUS:** CREATED_NOT_DISPATCHED
+**COMMAND_STATUS:** COMMAND_DISPATCHED (historical dispatch state; Worker execution and review are complete)
 
 ### Objective
 
@@ -322,4 +322,40 @@ Any source file is missing; SHA-256 differs from M2 accepted inventory; M2 Data 
 - Worker Return → Web Brain independent review → STUDENT-MAIN acceptance.
 - No PASS or M3 completion may be claimed before actual pushed-file readback and source-row reconciliation evidence.
 
-**Current status:** M2 ACCEPTED_WITH_NOTES; M3 FORMALLY AUTHORIZED; GOVERNANCE SYNC COMPLETED AND REMOTELY READ BACK; Web Own Worker NOT_DISPATCHED; M4–M5 LOCKED.
+**Current status:** M2 ACCEPTED_WITH_NOTES; M3 ACCEPTED_WITH_NOTES and CLOSED by STUDENT-MAIN; Web Own Worker execution SUCCESS as reported and reviewed by Web Brain; M4–M5 LOCKED.
+
+
+## M3 MAIN Acceptance and Closure — M3_FD001_READONLY_API_001
+
+**MAIN DECISION:** ACCEPTED_WITH_NOTES  
+**WORKER EXECUTION:** SUCCESS (Worker Return as relayed by STUDENT-WEB Brain)  
+**WEB BRAIN REVIEW:** PASS_WITH_NOTES  
+**MAIN ACCEPTANCE:** ACCEPTED_WITH_NOTES  
+**WORK ITEM STATUS:** CLOSED  
+**FINAL REPORTED REMOTE HEAD:** 6572ddfeec2c728b17cde424c11d91a2c7ba9aec  
+**IMPLEMENTATION COMMIT:** 84ddd697aef5af67678b0e850779a6bc67983684  
+**EXECUTION-LOG COMMIT:** 6572ddfeec2c728b17cde424c11d91a2c7ba9aec  
+**DISPATCH BASE:** f2f26d531d80e6afe4a6f134ca70a7906b2c2065
+
+### Acceptance basis
+
+MAIN accepts the M3 read-only API deliverable based on the STUDENT-WEB Brain's independent remote review report, which states that it read the eight delivered files and checked the implementation, API contract, automated tests, source-row reconciliation report/program, execution log, commit ancestry, and changed-file scope.
+
+Reviewed items reported by Web Brain:
+- Required GET endpoints: /api/health, /api/catalog, /api/units, and /api/history.
+- Success/error response contract, JSON null semantics, validation behavior, and read-only method restrictions.
+- Sensor ID 1-based mapping; Sensor 7 maps to sensor_07 and raw column index 11, per the reviewed M2 contract.
+- Per-record original source file and 1-based physical source_line provenance.
+- 17 automated tests reported passing.
+- 40/40 Train/Test source-row matches reported, supported by reconciliation code and report.
+- Two commits with the reported parent-child relationship and eight delivered files; Web Brain reported no unauthorized changes.
+
+### Acceptance notes and evidence limitation
+
+1. Web Brain reviewed the reconciliation program and its 40-row report but could not directly access the student's local train_FD001.txt, test_FD001.txt, and RUL_FD001.txt to rerun the raw-source comparison. MAIN therefore accepts the delivered reconciliation evidence as reviewed evidence, not as a fresh independent MAIN- or Web-Brain-executed raw-data verification.
+2. MAIN's decision relies on the Web Brain's reported remote readback and review. This record does not claim that MAIN independently reran the API tests or accessed the student's local raw data.
+3. M3 acceptance covers the bounded read-only API deliverable only. It does not accept or authorize frontend integration, Evidence Prompt generation, M4, or M5.
+
+### Next milestone boundary
+
+M3_FD001_READONLY_API_001 is CLOSED. M4 Evidence & Traceability System and M5 FD001 Integration & Final Validation remain LOCKED pending their prerequisites and separate explicit MAIN authorization.
