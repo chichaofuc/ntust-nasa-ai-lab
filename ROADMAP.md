@@ -34,7 +34,7 @@ The project follows milestone-controlled, sequential development. M0 is ACCEPTED
 
 ## M3 — Health Analysis Web MVP
 
-**Status:** FORMALLY AUTHORIZED under M3_FD001_READONLY_API_001; execution remains pending governance readback and separate Web Brain dispatch.
+**Status:** ACCEPTED_WITH_NOTES by STUDENT-MAIN under M3_FD001_READONLY_API_001. Read-only API implementation and Web Brain review are complete. Acceptance notes: Web Brain reviewed the source-row reconciliation program/report and Worker execution evidence but could not independently rerun reconciliation against the student's local original FD001 files. M4 remains LOCKED.
 
 **Objective:** Develop a local interactive analysis website.
 
