@@ -58,6 +58,7 @@ Never expose or commit secrets, tokens, or private keys. Never embed credentials
 - **M1 Dataset Profile:** ACCEPTED_WITH_NOTES; M1 Domain Acceptance is ESTABLISHED, per formal MAIN decision in M2_FD001_LOCAL_DATA_VALIDATION_001.
 - **M2 FD001 Local Data Validation:** ACCEPTED_WITH_NOTES by STUDENT-MAIN after Research Brain review of the final return and remote evidence.
 - **M3 Health Analysis Web MVP:** ACCEPTED_WITH_NOTES by STUDENT-MAIN under M3_FD001_READONLY_API_001. The read-only API deliverable is closed; acceptance notes preserve the limitation that Web Brain did not independently rerun the source-row reconciliation against the student's local raw files.
-- **M4–M5:** LOCKED.
+- **M4 Interactive Web UI & Source Traceability:** FORMALLY AUTHORIZED under `M4_FD001_INTERACTIVE_WEB_UI_001`; Worker remains NOT_DISPATCHED until Owner pastes the formal command.
+- **M5:** LOCKED.
 
 M1 Dataset Profile is accepted with notes; domain acceptance is established. M2 FD001 Local Data Validation is ACCEPTED_WITH_NOTES. M3 Health Analysis Web MVP is ACCEPTED_WITH_NOTES and M3_FD001_READONLY_API_001 is CLOSED. M4–M5 remain LOCKED and are not authorized.
