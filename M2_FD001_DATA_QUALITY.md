@@ -8,7 +8,8 @@ Phase A: `PASS_WITH_NOTES`; no source values were changed, dropped, or filled.
 | Malformed width | 0 | 0 | 0 | Expected 26/26/1 tokens. |
 | Unparseable/nonfinite | 0 | 0 | 0 | All tokens finite numeric values. |
 | Blank lines | 0 | 0 | 0 | Whitespace-only physical lines. |
-| Exact duplicate rows | 0 | 0 | 29 | Exact tuple equality; excess occurrences. |
+| Exact duplicate rows | 0 | 0 | N/A | RUL has one scalar per row, so duplicate row comparison is not applicable across distinct Units. |
+| Repeated RUL scalar values | N/A | N/A | 29 | Repeated values across RUL records; expected and not classified as duplicate records or a quality defect. |
 | Duplicate Unit-Cycle | 0 | 0 | N/A | Exact (Unit ID, Cycle) pair. |
 | Missing cells | 0 | 0 | 0 | Fixed-width whitespace records have no null tokens. |
 

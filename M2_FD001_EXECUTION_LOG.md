@@ -83,7 +83,7 @@ Six sensors (`sensor_01`, `sensor_05`, `sensor_10`, `sensor_16`, `sensor_18`, `s
 
 The script produced the first five required reports. This execution log completes the sixth. Detailed analysis labels physical sensor meaning as UNKNOWN where unsupported. `BASELINE_STATUS: NOT_ESTABLISHED`; descriptive trends and statistical flags are not fault diagnosis. M2 acceptance remains pending independent Research Brain review.
 
-The compile step generated `__pycache__/M2_FD001_analysis.cpython-313.pyc`; it is outside the commit allowlist and will not be staged. Raw source files are excluded from Git. Git commit, push, and remote readback evidence will be added after change review.
+The compile step generated `__pycache__/M2_FD001_analysis.cpython-313.pyc`; it is outside the commit allowlist and will not be staged. Raw source files are excluded from Git. At the time this initial log version was written, Git commit, push, and remote readback were still pending; subsequent evidence is recorded below.
 
 ## Initial commit and independent remote readback
 
@@ -98,7 +98,7 @@ The first deliverable commit was pushed to the existing `main` branch:
 
 After push, each report was independently fetched from GitHub `main`. Its remote Git Blob SHA matched the local commit's Git Blob SHA:
 
-| File | Remote Git Blob SHA | GitHub |
+| File | Remote Git Blob SHA at initial delivery commit `9a163a85570d717888b4f38bb148330d123b25fc` (not the final `main` Blob SHA) | GitHub |
 |---|---|---|
 | `M2_FD001_FILE_INVENTORY.md` | `6b0202edef49e99725b259c1284cea6dfd4d7674` | https://github.com/chichaofuc/ntust-nasa-ai-lab/blob/main/M2_FD001_FILE_INVENTORY.md |
 | `M2_FD001_RAW_DATA_PROFILE.md` | `3b58fab41dff764716d9650134538d385684d896` | https://github.com/chichaofuc/ntust-nasa-ai-lab/blob/main/M2_FD001_RAW_DATA_PROFILE.md |
@@ -107,6 +107,12 @@ After push, each report was independently fetched from GitHub `main`. Its remote
 | `M2_FD001_DATA_CONTRACT.md` | `05a617f80efc562430718ec90ea8f9a16b01daac` | https://github.com/chichaofuc/ntust-nasa-ai-lab/blob/main/M2_FD001_DATA_CONTRACT.md |
 | `M2_FD001_EXECUTION_LOG.md` | `969a9336931f585338f4f2c3c403321620c017ec` | https://github.com/chichaofuc/ntust-nasa-ai-lab/blob/main/M2_FD001_EXECUTION_LOG.md |
 
-The readback verified each fetched path and content was served at the expected report path. Raw data remain excluded. A Python bytecode cache created by `py_compile` is untracked and excluded from all commits; pre-existing untracked user files and the `data/` directory were not staged or modified.
+The readback verified each fetched path and content was served at the expected report path. The execution-log Blob SHA in this table is explicitly the value at the initial delivery commit only. A later evidence-append commit changed this log; its final Blob SHA must be taken from the independent post-push Worker Return, not from this self-referential document. Raw data remain excluded. A Python bytecode cache created by `py_compile` is untracked and excluded from all commits; pre-existing untracked user files and the `data/` directory were not staged or modified.
 
-This log update records the post-push verification and will be committed separately, then all six files will be fetched and verified again against the final `main` commit.
+This log update records the initial post-push verification and was committed separately. All six files were subsequently fetched and verified against `main` at `0b16d08a7b03afd6ed2bad305f4c3bee94e9394a`; the `M2_FD001_EXECUTION_LOG.md` remote Blob SHA at that later HEAD was `f533c4cc4eaaa613c3be999d8a582299b2052dc7`. That SHA describes that historical readback, not any future version of this file.
+
+## Research Review corrections
+
+Research Brain identified that a repeated scalar RUL value had been mislabeled as a duplicate row and that zero-slope Units appeared among directional extremes. The analysis script now reports repeated RUL scalar values separately (not as a duplicate-row defect), counts strict positive, negative, and zero OLS slopes, and selects directional examples only from slopes strictly above or below zero. No slope tolerance was introduced. The trend and data-quality reports were regenerated from the same verified local inputs. The review also identified that the earlier execution-log table did not distinguish the initial-commit Blob SHA from later remote readbacks; the table and chronology above now make that distinction explicit. Final corrected commit SHA, final remote HEAD, and all six final Blob SHAs are supplied in the Worker Return after post-push verification.
+
+Correction rerun: `python .\M2_FD001_analysis.py`; Python `3.13.14`; start `2026-11-27T00:54:27+08:00`; finish `2026-11-27T00:54:29+08:00`; exit code `0`; stderr empty. The script regenerated the five analysis reports listed in `OUT` from the three read-only local FD001 sources. Phase A remained `PASS_WITH_NOTES`; Phase B completed after that gate. The same byte sizes and SHA-256 values recorded above were observed before and after the rerun. The corrected quality table reports `Exact duplicate rows: N/A` for RUL and `Repeated RUL scalar values: 29`, explicitly not a quality defect. Trend output reports strict positive/negative/zero slope counts; directional examples have strictly signed slopes only. `git diff --check` passed after generated-file review.
