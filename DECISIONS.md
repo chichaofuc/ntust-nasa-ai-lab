@@ -191,4 +191,4 @@
 
 **Work Item:** `M5_GOVERNANCE_SYNC_001`  
 **Decision:** Synchronize the above M4 acceptance and M5 authorization into current governance status across `AGENTS.md`, `ROADMAP.md`, `WORK_ITEM.md`, and `DECISIONS.md`, preserving historical records and the original M5 scope/acceptance criteria.  
-**Status:** AUTHORIZED / IN_PROGRESS
+**Status:** COMPLETED / VERIFIED
