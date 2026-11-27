@@ -456,4 +456,30 @@ M3 API 檔案/啟動方式/契約無法確認；M2 Data Contract 或欄位映射
 - Worker Return → Web Brain 獨立複審（讀回實際 push 檔案、核對瀏覽器操作軌跡與 API/CSV 對照）→ STUDENT-MAIN 最終驗收。
 - 不得以靜態截圖或 Worker 自述取代實際 UAT 證據；未滿足任一必要驗收條件不得宣告 PASS。
 
-**Current status:** M3 ACCEPTED_WITH_NOTES / CLOSED; M4 FORMALLY AUTHORIZED / CREATED_NOT_DISPATCHED; M5 LOCKED.
+**Historical status at time of M4 Work Item:** M3 ACCEPTED_WITH_NOTES / CLOSED; M4 FORMALLY AUTHORIZED / CREATED_NOT_DISPATCHED; M5 LOCKED. This historical snapshot is superseded by the authoritative status below.
+
+## Current Authoritative Governance Status — M5 Governance Sync
+
+**Work Item:** `M5_GOVERNANCE_SYNC_001`
+
+- M4 `M4_FD001_INTERACTIVE_WEB_UI_001`: `ACCEPTED_WITH_NOTES` by STUDENT-MAIN. Acceptance basis: GitHub implementation readback verified; Web Brain review `PASS_WITH_NOTES`; Worker-submitted UAT (9/9) and API/CSV/UI reconciliation (62/62) accepted as Worker evidence. MAIN did not claim independent local reproduction.
+- M5 `M5_FD001_EVIDENCE_PROMPT_GENERATOR_001`: `FORMAL_DISPATCH_AUTHORIZED` by STUDENT-MAIN. Scope: Evidence Prompt Generator only. AC01–AC14 in the formal MAIN authorization remain unchanged and authoritative. No Own Worker implementation was dispatched by this governance-sync task.
+- M5 implementation status: NOT STARTED pending MAIN review of this governance synchronization and the next dispatch step.
+
+
+### M5 AC01–AC14 — preserved from formal MAIN authorization
+
+- AC01: Current UI selection is correctly represented.
+- AC02: Evidence is derived from M3 API responses.
+- AC03: Dataset, Unit, Cycle, Sensor, Split, and provenance are included.
+- AC04: Raw column and index mapping are correct.
+- AC05: Sensor semantics are only included when verified.
+- AC06: Statistics are calculated from actual observations.
+- AC07: Data quality claims are evidence-supported.
+- AC08: KNOWN / INFERRED / UNKNOWN are clearly separated.
+- AC09: Copy Prompt output equals Preview content.
+- AC10: Selection changes refresh the Prompt without stale data.
+- AC11: Invalid, empty, or failed data cannot produce fabricated Evidence.
+- AC12: Original FD001 data and M3 API remain read-only.
+- AC13: No synthetic data is used.
+- AC14: Prompt explicitly prohibits unsupported fault diagnosis and RUL prediction.
