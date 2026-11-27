@@ -177,3 +177,33 @@
 **Data boundary:** Use M3 API as the UI data interface; original FD001 CSV files remain read-only and may be used only for controlled reconciliation. GEN-001 and all Ch12 synthetic CSVs are prohibited. No M3 API contract changes, model training, diagnosis, Evidence Prompt Generator, or M5 integration are authorized.
 **Dispatch gate:** Web Brain must read latest AGENTS.md, M3 API implementation/contract, and M2 Data Contract from GitHub main before preparing the complete Worker command. Worker execution begins only after Owner pastes the command marked COMMAND_DISPATCHED.
 **M5:** Remains LOCKED.
+
+
+## D024 — M4 Acceptance and M5 Evidence Prompt Generator Authorization
+
+**Authority:** STUDENT-MAIN Brain  
+**Related Work Items:** `M4_FD001_INTERACTIVE_WEB_UI_001`; `M5_FD001_EVIDENCE_PROMPT_GENERATOR_001`  
+**M4 Decision:** `ACCEPTED_WITH_NOTES`. Basis: GitHub implementation readback verified; Web Brain review `PASS_WITH_NOTES`; Worker-reported browser UAT (9/9) and API/CSV/UI reconciliation (62/62) accepted by MAIN as Worker evidence. MAIN did not claim independent local reproduction.  
+**M5 Decision:** `FORMAL_DISPATCH_AUTHORIZED`. Scope is Evidence Prompt Generator only. AC01–AC14 remain unchanged from the formal MAIN authorization. This governance sync does not dispatch the M5 Own Worker.  
+**Status:** RECORDED
+
+## D025 — M5 Governance Synchronization
+
+**Work Item:** `M5_GOVERNANCE_SYNC_001`  
+**Decision:** Synchronize the above M4 acceptance and M5 authorization into current governance status across `AGENTS.md`, `ROADMAP.md`, `WORK_ITEM.md`, and `DECISIONS.md`, preserving historical records and the original M5 scope/acceptance criteria.  
+**Status:** AUTHORIZED / IN_PROGRESS
+
+
+## D024 — M4 Acceptance and M5 Evidence Prompt Generator Authorization
+
+**Authority:** STUDENT-MAIN Brain  
+**Related Work Items:** `M4_FD001_INTERACTIVE_WEB_UI_001`; `M5_FD001_EVIDENCE_PROMPT_GENERATOR_001`  
+**M4 Decision:** `ACCEPTED_WITH_NOTES`. Basis: GitHub implementation readback verified; Web Brain review `PASS_WITH_NOTES`; Worker-reported browser UAT (9/9) and API/CSV/UI reconciliation (62/62) accepted by MAIN as Worker evidence. MAIN did not claim independent local reproduction.  
+**M5 Decision:** `FORMAL_DISPATCH_AUTHORIZED`. Scope is Evidence Prompt Generator only. AC01–AC14 remain unchanged from the formal MAIN authorization. This governance sync does not dispatch the M5 Own Worker.  
+**Status:** RECORDED
+
+## D025 — M5 Governance Synchronization
+
+**Work Item:** `M5_GOVERNANCE_SYNC_001`  
+**Decision:** Synchronize the above M4 acceptance and M5 authorization into current governance status across `AGENTS.md`, `ROADMAP.md`, `WORK_ITEM.md`, and `DECISIONS.md`, preserving historical records and the original M5 scope/acceptance criteria.  
+**Status:** AUTHORIZED / IN_PROGRESS
