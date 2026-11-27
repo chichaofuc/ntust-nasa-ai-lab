@@ -1,0 +1,270 @@
+{
+  "work_item": "M4_FD001_INTERACTIVE_WEB_UI_001",
+  "started": "2026-11-27T11:44:39+08:00",
+  "workspace": "C:\\Users\\as555\\Desktop\\20261123_AI\\20261123_AI",
+  "source_before": {
+    "train": {
+      "path": "data/FD001/train_FD001.txt",
+      "bytes": 3515356,
+      "physical_lines": 20631,
+      "sha256": "963B5E22825B34D8B21C69E1AEB4AF3E647050EB672EE8834BA4B5D91D2DE0F8"
+    },
+    "test": {
+      "path": "data/FD001/test_FD001.txt",
+      "bytes": 2228855,
+      "physical_lines": 13096,
+      "sha256": "3CDA7109CE17BAFB5443F2AC926CFCF88154B941B8C4CF95EB55D1DDD6F52851"
+    },
+    "rul": {
+      "path": "data/FD001/RUL_FD001.txt",
+      "bytes": 429,
+      "physical_lines": 100,
+      "sha256": "A19C8EC94931949D0485BDC35118206E9C81C4547B422EFB9CF86F4CEDDBCECA"
+    }
+  },
+  "steps": [
+    {
+      "time": "2026-11-27T11:44:44+08:00",
+      "name": "UAT-01 Initial load",
+      "expected": "Real page loads; health, catalog, Train Units and Sensors come from M3; chart/table show actual records",
+      "actual": "FD001 Engine Health Analysis; Verified FD001 sources connected; 192 rows/192 points; 100 Units and 21 Sensors",
+      "status": "PASS"
+    },
+    {
+      "time": "2026-11-27T11:44:45+08:00",
+      "name": "UAT-02 Unit switching / stale data",
+      "expected": "Switch Unit 1→2, clear old view while loading, reload Unit 2 and its API-derived Cycle bounds",
+      "actual": "Unit 2 · 1–287 cycles; bounds 1–287; old chart/table cleared before response",
+      "status": "PASS"
+    },
+    {
+      "time": "2026-11-27T11:44:46+08:00",
+      "name": "Train Unit 2 Sensor 7 Cycle 1–20",
+      "expected": "train Unit 2, Sensor 7, inclusive Cycle 1–20; chart, table and captured browser API JSON agree",
+      "actual": "API 200; 20 table rows; 20 SVG points; fields/provenance matched record-by-record",
+      "status": "PASS",
+      "request": "/api/history?split=train&unit=2&sensor=7&start=1&end=20",
+      "api_count": 20,
+      "chart_points": 20,
+      "table_rows": 20
+    },
+    {
+      "time": "2026-11-27T11:44:48+08:00",
+      "name": "Train Unit 2 Sensor 11 Cycle 3–14",
+      "expected": "train Unit 2, Sensor 11, inclusive Cycle 3–14; chart, table and captured browser API JSON agree",
+      "actual": "API 200; 12 table rows; 12 SVG points; fields/provenance matched record-by-record",
+      "status": "PASS",
+      "request": "/api/history?split=train&unit=2&sensor=11&start=3&end=14",
+      "api_count": 12,
+      "chart_points": 12,
+      "table_rows": 12
+    },
+    {
+      "time": "2026-11-27T11:44:50+08:00",
+      "name": "Train Unit 1 Sensor 7 Cycle 1–20",
+      "expected": "train Unit 1, Sensor 7, inclusive Cycle 1–20; chart, table and captured browser API JSON agree",
+      "actual": "API 200; 20 table rows; 20 SVG points; fields/provenance matched record-by-record",
+      "status": "PASS",
+      "request": "/api/history?split=train&unit=1&sensor=7&start=1&end=20",
+      "api_count": 20,
+      "chart_points": 20,
+      "table_rows": 20
+    },
+    {
+      "time": "2026-11-27T11:44:55+08:00",
+      "name": "Test Unit 2 Sensor 7 Cycle 1–10",
+      "expected": "test Unit 2, Sensor 7, inclusive Cycle 1–10; chart, table and captured browser API JSON agree",
+      "actual": "API 200; 10 table rows; 10 SVG points; fields/provenance matched record-by-record",
+      "status": "PASS",
+      "request": "/api/history?split=test&unit=2&sensor=7&start=1&end=10",
+      "api_count": 10,
+      "chart_points": 10,
+      "table_rows": 10
+    },
+    {
+      "time": "2026-11-27T11:44:55+08:00",
+      "name": "UAT-07 Invalid Cycle range",
+      "expected": "Reject Start 11 > End 10 and clear previous data",
+      "actual": "Check range; validation message: Start Cycle must be less than or equal to End Cycle; 0 rows and 0 points",
+      "status": "PASS"
+    },
+    {
+      "time": "2026-11-27T11:44:59+08:00",
+      "name": "UAT-08 API unavailable",
+      "expected": "With M3 stopped, show 503 error and clear old data",
+      "actual": "API unavailable; HTTP 503; 0 rows and 0 points",
+      "status": "PASS"
+    },
+    {
+      "time": "2026-11-27T11:45:01+08:00",
+      "name": "UAT-09 Recovery",
+      "expected": "Restart M3 and restore the current valid query",
+      "actual": "View ready; 10 rows and 10 points",
+      "status": "PASS"
+    }
+  ],
+  "api_start": {
+    "command": "python M3_FD001_api.py (FD001_API_PORT=18766)",
+    "status": 200,
+    "stdout": "C:\\Users\\as555\\Desktop\\20261123_AI\\20261123_AI\\M4_UAT_EVIDENCE\\m3-api.stdout.log",
+    "stderr": "C:\\Users\\as555\\Desktop\\20261123_AI\\20261123_AI\\M4_UAT_EVIDENCE\\m3-api.stderr.log"
+  },
+  "web_start": {
+    "command": "python M4_FD001_web_server.py --port 18767 --api-base http://127.0.0.1:18766",
+    "status": 200,
+    "url": "http://127.0.0.1:18767/",
+    "stdout": "C:\\Users\\as555\\Desktop\\20261123_AI\\20261123_AI\\M4_UAT_EVIDENCE\\m4-web.stdout.log",
+    "stderr": "C:\\Users\\as555\\Desktop\\20261123_AI\\20261123_AI\\M4_UAT_EVIDENCE\\m4-web.stderr.log"
+  },
+  "finished": "2026-11-27T11:45:01+08:00",
+  "browser": {
+    "name": "Brave (Chromium)",
+    "version": "158.0.8127.92",
+    "capabilities": "chrome"
+  },
+  "url": "http://127.0.0.1:18767/",
+  "api_base_url": "http://127.0.0.1:18766",
+  "browser_console_severe_errors": [
+    {
+      "level": "SEVERE",
+      "message": "http://127.0.0.1:18767/api/history?split=test&unit=2&sensor=7&start=1&end=10 - Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+      "source": "network",
+      "timestamp": 1795751099054
+    }
+  ],
+  "browser_console_expected_errors": [
+    {
+      "level": "SEVERE",
+      "message": "http://127.0.0.1:18767/api/history?split=test&unit=2&sensor=7&start=1&end=10 - Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+      "source": "network",
+      "timestamp": 1795751099054
+    }
+  ],
+  "browser_console_unexpected_errors": [],
+  "browser_network_api_responses": [
+    {
+      "url": "http://127.0.0.1:18767/api/catalog",
+      "status": 200,
+      "mimeType": "application/json"
+    },
+    {
+      "url": "http://127.0.0.1:18767/api/health",
+      "status": 200,
+      "mimeType": "application/json"
+    },
+    {
+      "url": "http://127.0.0.1:18767/api/units?split=train",
+      "status": 200,
+      "mimeType": "application/json"
+    },
+    {
+      "url": "http://127.0.0.1:18767/api/history?split=train&unit=1&sensor=1&start=1&end=192",
+      "status": 200,
+      "mimeType": "application/json"
+    },
+    {
+      "url": "http://127.0.0.1:18767/api/history?split=train&unit=2&sensor=1&start=1&end=287",
+      "status": 200,
+      "mimeType": "application/json"
+    },
+    {
+      "url": "http://127.0.0.1:18767/api/history?split=train&unit=2&sensor=7&start=1&end=287",
+      "status": 200,
+      "mimeType": "application/json"
+    },
+    {
+      "url": "http://127.0.0.1:18767/api/history?split=train&unit=2&sensor=7&start=1&end=20",
+      "status": 200,
+      "mimeType": "application/json"
+    },
+    {
+      "url": "http://127.0.0.1:18767/api/history?split=train&unit=2&sensor=11&start=1&end=20",
+      "status": 200,
+      "mimeType": "application/json"
+    },
+    {
+      "url": "http://127.0.0.1:18767/api/history?split=train&unit=2&sensor=11&start=3&end=14",
+      "status": 200,
+      "mimeType": "application/json"
+    },
+    {
+      "url": "http://127.0.0.1:18767/api/history?split=train&unit=1&sensor=11&start=1&end=192",
+      "status": 200,
+      "mimeType": "application/json"
+    },
+    {
+      "url": "http://127.0.0.1:18767/api/history?split=train&unit=1&sensor=7&start=1&end=192",
+      "status": 200,
+      "mimeType": "application/json"
+    },
+    {
+      "url": "http://127.0.0.1:18767/api/history?split=train&unit=1&sensor=7&start=1&end=20",
+      "status": 200,
+      "mimeType": "application/json"
+    },
+    {
+      "url": "http://127.0.0.1:18767/api/units?split=test",
+      "status": 200,
+      "mimeType": "application/json"
+    },
+    {
+      "url": "http://127.0.0.1:18767/api/history?split=test&unit=1&sensor=7&start=1&end=31",
+      "status": 200,
+      "mimeType": "application/json"
+    },
+    {
+      "url": "http://127.0.0.1:18767/api/history?split=test&unit=2&sensor=7&start=1&end=49",
+      "status": 200,
+      "mimeType": "application/json"
+    },
+    {
+      "url": "http://127.0.0.1:18767/api/history?split=test&unit=2&sensor=7&start=1&end=10",
+      "status": 200,
+      "mimeType": "application/json"
+    },
+    {
+      "url": "http://127.0.0.1:18767/api/history?split=test&unit=2&sensor=7&start=1&end=10",
+      "status": 200,
+      "mimeType": "application/json"
+    },
+    {
+      "url": "http://127.0.0.1:18767/api/history?split=test&unit=2&sensor=7&start=1&end=10",
+      "status": 503,
+      "mimeType": "application/json"
+    },
+    {
+      "url": "http://127.0.0.1:18767/api/history?split=test&unit=2&sensor=7&start=1&end=10",
+      "status": 200,
+      "mimeType": "application/json"
+    }
+  ],
+  "csv_comparison_count": 62,
+  "csv_comparison_failures": 0,
+  "source_after": {
+    "train": {
+      "path": "data/FD001/train_FD001.txt",
+      "bytes": 3515356,
+      "physical_lines": 20631,
+      "sha256": "963B5E22825B34D8B21C69E1AEB4AF3E647050EB672EE8834BA4B5D91D2DE0F8"
+    },
+    "test": {
+      "path": "data/FD001/test_FD001.txt",
+      "bytes": 2228855,
+      "physical_lines": 13096,
+      "sha256": "3CDA7109CE17BAFB5443F2AC926CFCF88154B941B8C4CF95EB55D1DDD6F52851"
+    },
+    "rul": {
+      "path": "data/FD001/RUL_FD001.txt",
+      "bytes": 429,
+      "physical_lines": 100,
+      "sha256": "A19C8EC94931949D0485BDC35118206E9C81C4547B422EFB9CF86F4CEDDBCECA"
+    }
+  },
+  "status": "PASS_WITH_EVIDENCE",
+  "performance_log_entries_remaining": 0,
+  "browser_log_entries_remaining": 0,
+  "process_logs": {
+    "m3_stdout": "Serving NASA_CMAPSS_FD001 read-only API at http://127.0.0.1:18766\n",
+    "m4_stdout": "Serving M4 UI at http://127.0.0.1:18767 (M3 API: http://127.0.0.1:18766)\n"
+  }
+}

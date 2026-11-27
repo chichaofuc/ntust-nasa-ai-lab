@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102a35">
+  <title>FD001 Engine Health Analysis</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="FD001 Analysis home">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        <span><strong>FIELDNOTE</strong><small>NTUST NASA AI LAB</small></span>
+      </a>
+      <div class="topbar-meta"><span class="live-dot"></span><span id="health-label">Connecting to verified data</span></div>
+      <span class="dataset-chip">NASA · C-MAPSS · FD001</span>
+    </header>
+
+    <main>
+      <section class="intro">
+        <div>
+          <p class="eyebrow">ENGINE HEALTH ANALYSIS <span> / </span> M4 INTERACTIVE VIEW</p>
+          <h1>Read the signal.<br><em>Trace every point.</em></h1>
+          <p class="intro-copy">Explore cycle-by-cycle sensor readings from the verified FD001 source. Every point links back to its original file row.</p>
+        </div>
+        <div class="intro-stamp"><span class="stamp-label">DATA CONTRACT</span><strong>M2 · FD001</strong><span>Read-only source</span></div>
+      </section>
+
+      <section class="control-card" aria-labelledby="controls-title">
+        <div class="section-heading control-heading">
+          <div><p class="eyebrow">01 / SELECT OBSERVATIONS</p><h2 id="controls-title">Build a view</h2></div>
+          <span id="query-state" class="state-pill state-loading">Loading catalog</span>
+        </div>
+        <form id="query-form" novalidate>
+          <div class="control-grid">
+            <label class="field"><span>Data split</span><select id="split-select" name="split" disabled><option value="train">Train</option><option value="test">Test</option></select></label>
+            <label class="field"><span>Engine unit</span><select id="unit-select" name="unit" disabled></select></label>
+            <label class="field sensor-field"><span>Sensor channel</span><select id="sensor-select" name="sensor" disabled></select></label>
+            <fieldset class="cycle-field"><legend>Cycle range <small id="cycle-bounds">Waiting for Unit</small></legend><div class="cycle-inputs"><label><span class="sr-only">Start cycle</span><input id="start-input" name="start" type="number" step="1" disabled aria-label="Start cycle"></label><span class="range-dash">to</span><label><span class="sr-only">End cycle</span><input id="end-input" name="end" type="number" step="1" disabled aria-label="End cycle"></label></div></fieldset>
+            <button class="apply-button" id="apply-button" type="submit" disabled><span>Update view</span><span aria-hidden="true">↗</span></button>
+          </div>
+        </form>
+        <div id="notice" class="notice" role="status" aria-live="polite"><span class="notice-icon">i</span><span>Validating the local FD001 sources through the read-only API…</span></div>
+      </section>
+
+      <section class="summary-grid" aria-label="Current query summary">
+        <article class="summary-card"><span class="summary-label">OBSERVATIONS</span><strong id="count-value">—</strong><span id="count-detail">Cycle rows returned</span></article>
+        <article class="summary-card"><span class="summary-label">CYCLE WINDOW</span><strong id="window-value">—</strong><span id="window-detail">Inclusive range</span></article>
+        <article class="summary-card"><span class="summary-label">SOURCE FILE</span><strong id="source-value">—</strong><span id="source-detail">Original source</span></article>
+        <article class="summary-card summary-status"><span class="summary-label">SOURCE TRACE</span><strong id="trace-value">Awaiting query</strong><span id="trace-detail">Physical line mapping</span></article>
+      </section>
+
+      <section class="panel chart-panel" aria-labelledby="chart-title">
+        <div class="section-heading chart-heading">
+          <div><p class="eyebrow">02 / SENSOR TREND</p><h2 id="chart-title">Cycle profile <span id="sensor-title"></span></h2></div>
+          <div class="chart-legend"><span class="legend-line"></span><span>Observed value</span><span class="unit-unknown">Unit not provided</span></div>
+        </div>
+        <div id="chart-empty" class="empty-state"><div class="empty-orbit">↗</div><strong>Choose a view to begin</strong><span>Chart points will come directly from the selected API response.</span></div>
+        <div id="chart-wrap" class="chart-wrap" hidden>
+          <svg id="trend-chart" viewBox="0 0 1000 350" role="img" aria-label="Sensor values by cycle"></svg>
+          <div id="point-detail" class="point-detail" aria-live="polite"><span class="detail-kicker">POINT INSPECTION</span><strong>Select a plotted point</strong><span>Hover for a quick read; click a point to pin its source row.</span></div>
+        </div>
+        <div class="chart-foot"><span id="chart-caption">—</span><span>Sensor physical meaning and unit: UNKNOWN</span></div>
+      </section>
+
+      <section class="panel table-panel" aria-labelledby="table-title">
+        <div class="section-heading table-heading">
+          <div><p class="eyebrow">03 / SOURCE DATA ROWS</p><h2 id="table-title">Traceable observations</h2></div>
+          <span class="table-count" id="table-count">0 rows</span>
+        </div>
+        <div id="table-empty" class="table-empty">No observations loaded. Apply a valid split, Unit, Sensor and Cycle range.</div>
+        <div id="table-wrap" class="table-wrap" hidden>
+          <table>
+            <thead><tr><th>Cycle</th><th>Unit ID</th><th>Sensor ID</th><th>Sensor field</th><th>Raw index</th><th>Value</th><th>Source file</th><th>Source line</th></tr></thead>
+            <tbody id="records-body"></tbody>
+          </table>
+        </div>
+        <div class="table-note"><span class="note-mark">↳</span><span>Source line is the original 1-based physical line. Values are displayed as returned; no normalization or imputation is applied.</span></div>
+      </section>
+
+      <footer class="footer"><span>FD001 · Local read-only analysis</span><span>Observation is not a fault diagnosis.</span><span id="contract-version">M2 Data Contract</span></footer>
+    </main>
+  </div>
+</body>
+</html>

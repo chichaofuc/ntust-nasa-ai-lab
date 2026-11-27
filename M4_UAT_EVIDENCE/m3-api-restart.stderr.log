@@ -1,0 +1,2 @@
+27/Nov/2026 11:45:00 - "GET /api/health HTTP/1.1" 200 -
+27/Nov/2026 11:45:00 - "GET /api/history?split=test&unit=2&sensor=7&start=1&end=10 HTTP/1.1" 200 -
